@@ -10,6 +10,7 @@ namespace App\Model;
 
 use App\Entity\Feed;
 use App\Model\Api\ParserInterface;
+use App\Model\Parser\GenericParser;
 use Psr\Http\Message\ResponseInterface;
 
 class ParserRepository
@@ -36,7 +37,7 @@ class ParserRepository
      */
     public function getParsers(): array
     {
-        $reflector = new \ReflectionClass(ParserInterface::class);
+        $reflector = new \ReflectionClass(GenericParser::class);
         $dir = dirname($reflector->getFileName());
         $namespace = $reflector->getNamespaceName();
         $directoryIterator = new \DirectoryIterator($dir);
