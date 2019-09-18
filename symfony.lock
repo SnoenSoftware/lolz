@@ -96,11 +96,29 @@
     "fig/link-util": {
         "version": "1.0.0"
     },
+    "guzzlehttp/guzzle": {
+        "version": "6.3.3"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.6.1"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
+    "jeremeamia/superclosure": {
+        "version": "2.4.0"
+    },
+    "lavary/crunz": {
+        "version": "v2.0.1"
+    },
     "monolog/monolog": {
         "version": "1.25.1"
+    },
+    "mtdowling/cron-expression": {
+        "version": "v1.2.1"
     },
     "nikic/php-parser": {
         "version": "v4.2.4"
@@ -126,11 +144,17 @@
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/link": {
         "version": "1.0.0"
     },
     "psr/log": {
         "version": "1.1.0"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
@@ -142,6 +166,18 @@
         },
         "files": [
             "config/packages/sensio_framework_extra.yaml"
+        ]
+    },
+    "squizlabs/php_codesniffer": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "0dc9cceda799fd3a08b96987e176a261028a3709"
+        },
+        "files": [
+            "phpcs.xml.dist"
         ]
     },
     "swiftmailer/swiftmailer": {
@@ -273,6 +309,9 @@
         "version": "v4.3.4"
     },
     "symfony/intl": {
+        "version": "v4.3.4"
+    },
+    "symfony/lock": {
         "version": "v4.3.4"
     },
     "symfony/maker-bundle": {
