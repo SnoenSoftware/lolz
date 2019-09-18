@@ -129,6 +129,12 @@
     "ocramius/proxy-manager": {
         "version": "2.2.3"
     },
+    "paquettg/php-html-parser": {
+        "version": "2.1.0"
+    },
+    "paquettg/string-encode": {
+        "version": "1.0.1"
+    },
     "phpdocumentor/reflection-common": {
         "version": "2.0.0"
     },
