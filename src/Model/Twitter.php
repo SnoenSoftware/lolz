@@ -9,6 +9,8 @@ namespace App\Model;
 
 
 use App\Entity\Lol;
+use GuzzleHttp\Client;
+use GuzzleHttp\RequestOptions;
 
 /**
  * Class Twitter
@@ -16,6 +18,7 @@ use App\Entity\Lol;
  */
 class Twitter
 {
+    public const OEMBED_URL = 'https://publish.twitter.com/oembed';
     /**
      * @param Lol $lol
      * @return bool
@@ -34,5 +37,36 @@ class Twitter
     public function getContent(Lol $lol): string
     {
         return sprintf('<tweet data-url="%s"/>', $lol->getImageUrl());
+    }
+
+    /**
+     * @param string $tweetUrl
+     * @return array
+     * @author bjorn
+     */
+    public function getTweet(string $tweetUrl): array
+    {
+        $client = $this->getTwitterClient();
+        $response = $client->get(self::OEMBED_URL, [
+            RequestOptions::QUERY => [
+                'url' => $tweetUrl
+            ]
+        ]);
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    /**
+     * @return Client
+     * @author bjorn
+     */
+    private function getTwitterClient(): Client
+    {
+        $client = new Client([
+            RequestOptions::HEADERS => [
+                'Accept' => 'application/json',
+                'User-Agent' => 'bjorn lolz generator'
+            ],
+        ]);
+        return $client;
     }
 }
