@@ -94,6 +94,9 @@ class RedditParser extends ParserAbstract
         foreach ($links->toArray() as $link) {
             if ($link->innerHtml() == "[link]") {
                 $imageHref = $link->tag->getAttribute('href')['value'];
+            } elseif (strpos($link->tag->getAttribute('href')['value'], 'i.redd.it') !== false) {
+                $imageHref = $link->tag->getAttribute('href')['value'];
+                break;
             }
         }
         return $imageHref;
