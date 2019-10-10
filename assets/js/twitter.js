@@ -7,7 +7,7 @@
             oembedUrl + '?url=' + tweetUrl,
             {
                 method: 'GET',
-                mode: "no-cors",
+                mode: "cors",
                 headers: {
                     "Accept": "application/json"
                 }
