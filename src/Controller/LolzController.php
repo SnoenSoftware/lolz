@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\LolRepository;
+use App\Service\LolzProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -10,13 +10,13 @@ class LolzController extends AbstractController
 {
     /**
      * @Route("/", name="lolz")
-     * @param LolRepository $lolRepository
+     * @param LolzProvider $lolzProvider
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(LolRepository $lolRepository)
+    public function index(LolzProvider $lolzProvider)
     {
         return $this->render('lolz/index.html.twig', [
-            'lolz' => $lolRepository->findBy([], ['fetched' => 'DESC'])
+            'lolz' => $lolzProvider->next()
         ]);
     }
 }

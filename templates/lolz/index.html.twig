@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LolzController!{% endblock %}
+{% block title %}Lolz!{% endblock %}
 
 {% block body %}
 
@@ -8,8 +8,13 @@
         {% for lol in lolz %}
             <div class="lol">
                 <h2>{{ lol.title }}</h2>
-                <img src="{{ lol.imageUrl }}" title="{{ lol.caption }}"/>
+                {{ lol.content|raw }}
             </div>
         {% endfor %}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://www.youtube.com/player_api"></script>
 {% endblock %}

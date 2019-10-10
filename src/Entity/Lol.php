@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Model\Twitter;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -46,6 +47,9 @@ class Lol
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $title;
+
+    /** @var string */
+    private $content;
 
     public function getId(): ?int
     {
@@ -110,5 +114,25 @@ class Lol
         $this->title = $title;
 
         return $this;
+    }
+
+    /**
+     * @param string $content
+     * @return Lol
+     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     */
+    public function setContent(string $content): self
+    {
+        $this->content = $content;
+        return $this;
+    }
+
+    /**
+     * @return string
+     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     */
+    public function getContent(): string
+    {
+        return $this->content ?? sprintf('<img src="%s" title="%s"/>', $this->getImageUrl(), $this->getCaption());
     }
 }
