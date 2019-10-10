@@ -9,6 +9,7 @@ namespace App\Service;
 
 
 use App\Entity\Lol;
+use App\Model\Imgur;
 use App\Model\Twitter;
 use App\Model\Youtube;
 use App\Repository\LolRepository;
@@ -30,15 +31,21 @@ class LolzProvider
      * @var Youtube
      */
     private $youtube;
+    /**
+     * @var Imgur
+     */
+    private $imgur;
 
     public function __construct(
         LolRepository $lolRepository,
         Twitter $twitter,
-        Youtube $youtube
+        Youtube $youtube,
+        Imgur $imgur
     ) {
         $this->lolRepository = $lolRepository;
         $this->twitter = $twitter;
         $this->youtube = $youtube;
+        $this->imgur = $imgur;
     }
 
     public function next(): \Generator
@@ -48,6 +55,8 @@ class LolzProvider
                 $lol->setContent($this->twitter->getContent($lol));
             } elseif ($this->youtube->isYoutube($lol)) {
                 $lol->setContent($this->youtube->getContent($lol));
+            } elseif ($this->imgur->isImgur($lol)) {
+                $lol->setContent($this->imgur->getContent($lol));
             }
             yield $lol;
         }

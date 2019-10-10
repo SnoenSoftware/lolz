@@ -8,6 +8,7 @@
 namespace App\Controller;
 
 
+use App\Model\Imgur;
 use App\Model\Twitter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -32,5 +33,19 @@ class ApiController extends AbstractController
         $statusUrl = $request->get('url');
         $tweet = $twitter->getTweet($statusUrl);
         return new JsonResponse($tweet);
+    }
+
+    /**
+     * @Route("/api/imgur", name="imgur", methods={"GET"}, condition="request.get('url') != null")
+     * @param Request $request
+     * @param Imgur $imgur
+     * @return JsonResponse
+     * @author bjorn
+     */
+    public function imgur(Request $request, Imgur $imgur): JsonResponse
+    {
+        $statusUrl = $request->get('url');
+        $imageData = $imgur->getRealImageData($statusUrl);
+        return new JsonResponse($imageData);
     }
 }
