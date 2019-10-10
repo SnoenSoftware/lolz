@@ -9,11 +9,23 @@ body {
     margin: auto;
 
     .lol{
-        margin: auto auto 2rem;
+        margin: auto;
+        padding: 2rem;
         text-align: center;
         max-width: 70vw;
         img{
-            max-width: 70vw;
+            max-width: 50vw;
+        }
+        &:after{
+            position: relative;
+            content:"";
+            height: 2px;
+            background-image: linear-gradient(to right, rgba(46, 138, 253, 0), rgba(46, 138, 253, 0.75), rgba(46, 138, 253, 0));
+            min-width: 40vw;
+            margin-top: 2rem;
+            border-radius: 3px;
+            z-index: 2;
+            display: block;
         }
     }
 }
