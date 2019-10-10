@@ -33,7 +33,7 @@ class DevHumorParser extends ParserAbstract
     {
         $current = $this->getCurrentItem();
         $this->pointer++;
-        if (!$current){
+        if (!$current) {
             return null;
         }
 
@@ -78,7 +78,7 @@ class DevHumorParser extends ParserAbstract
      */
     protected function getFeed(): \SimpleXMLElement
     {
-        if (!isset($this->feed)){
+        if (!isset($this->feed)) {
             $this->feed = new \SimpleXMLElement($this->getResponse()->getBody()->getContents());
         }
         return $this->feed;

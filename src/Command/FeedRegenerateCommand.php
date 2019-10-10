@@ -9,7 +9,9 @@ use App\Repository\LolRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\PromiseInterface;
+use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -81,7 +83,11 @@ class FeedRegenerateCommand extends Command
         }
 
         foreach ($this->promises as $promise) {
-            $promise->wait();
+            try {
+                $promise->wait();
+            } catch (RequestException $exception) {
+                $a = 1;
+            }
         }
         $this->entityManager->flush();
     }
@@ -104,7 +110,11 @@ class FeedRegenerateCommand extends Command
     protected function getClient(): ClientInterface
     {
         if (!isset($this->client)) {
-            $this->client = new Client();
+            $this->client = new Client([
+                RequestOptions::HEADERS => [
+                    'User-Agent' => 'bjorn lolz generator'
+                ]
+            ]);
         }
         return $this->client;
     }
