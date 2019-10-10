@@ -1,7 +1,6 @@
 (function(){
     window.onYouTubePlayerAPIReady = function() {
         let videos = document.querySelectorAll('youtube');
-        debugger;
         Array.from(videos).forEach(function (elem) {
             let videoId = elem.dataset.viewId;
             elem.setAttribute('id', videoId);
