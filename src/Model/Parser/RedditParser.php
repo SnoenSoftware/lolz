@@ -11,6 +11,7 @@ namespace App\Model\Parser;
 use App\Entity\Lol;
 use App\Model\Api\ParserAbstract;
 use PHPHtmlParser\Dom;
+use function GuzzleHttp\Psr7\str;
 
 class RedditParser extends ParserAbstract
 {
@@ -95,6 +96,9 @@ class RedditParser extends ParserAbstract
             if ($link->innerHtml() == "[link]") {
                 $imageHref = $link->tag->getAttribute('href')['value'];
             } elseif (strpos($link->tag->getAttribute('href')['value'], 'i.redd.it') !== false) {
+                $imageHref = $link->tag->getAttribute('href')['value'];
+                break;
+            } elseif (strpos($link->tag->getAttribute('href')['value'], 'v.redd.it') !== false) {
                 $imageHref = $link->tag->getAttribute('href')['value'];
                 break;
             }
