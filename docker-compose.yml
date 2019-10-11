@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  php:
+    image: "php:7.3-fpm"
+    volumes:
+      - './:/var/www/project/'
+
+  nginx:
+    image: 'nginx'
+    volumes:
+      - './:/var/www/project'
+      - './nginx.conf:/etc/nginx/conf.d/lolz.conf'
+    ports:
+      - 80:80
