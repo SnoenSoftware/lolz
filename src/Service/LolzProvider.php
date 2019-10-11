@@ -64,8 +64,8 @@ class LolzProvider
                 $lol->setContent($this->youtube->getContent($lol));
             } elseif ($this->imgur->isImgur($lol)) {
                 $lol->setContent($this->imgur->getContent($lol));
-            } elseif ($this->reddit->isVideo($lol)) {
-                $lol->setContent($this->reddit->getVideoContent($lol));
+            } elseif ($this->reddit->isVideo($lol) || $this->reddit->isNotImage($lol)) {
+                $lol->setContent($this->reddit->embedComment($lol));
             }
             yield $lol;
         }

@@ -36,6 +36,11 @@ class Reddit
         return strpos($lol->getImageUrl(), 'v.redd.it') !== false;
     }
 
+    public function isNotImage(Lol $lol): bool
+    {
+        return !pathinfo($lol->getImageUrl(), PATHINFO_EXTENSION);
+    }
+
     /**
      * @param Lol $lol
      * @return string
@@ -44,7 +49,7 @@ class Reddit
      * @throws \Twig\Error\SyntaxError
      * @author bjorn
      */
-    public function getVideoContent(Lol $lol): string
+    public function embedComment(Lol $lol): string
     {
         $url = $lol->getUrl();
         $parts = parse_url($url);
