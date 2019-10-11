@@ -45,6 +45,11 @@ class ApiController extends AbstractController
     public function imgur(Request $request, Imgur $imgur): JsonResponse
     {
         $statusUrl = $request->get('url');
+        $extension = pathinfo($statusUrl, PATHINFO_EXTENSION);
+        if ($extension) {
+            // It was already a real image url
+            return new JsonResponse(['data' => ['link' => $statusUrl]]);
+        }
         $imageData = $imgur->getRealImageData($statusUrl);
         return new JsonResponse($imageData);
     }
