@@ -55,9 +55,18 @@ class LolzProvider
         $this->reddit = $reddit;
     }
 
-    public function next(): \Generator
+    /**
+     * @param int $limit
+     * @param int $page
+     * @return \Generator
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     * @author bjorn
+     */
+    public function next(int $limit = 30, int $page = 0): \Generator
     {
-        foreach ($this->getLolz() as $lol) {
+        foreach ($this->getLolz($limit, $page) as $lol) {
             if ($this->twitter->isTweet($lol)) {
                 $lol->setContent($this->twitter->getContent($lol));
             } elseif ($this->youtube->isYoutube($lol)) {
@@ -72,13 +81,15 @@ class LolzProvider
     }
 
     /**
+     * @param int $limit
+     * @param int $page
      * @return Lol[]
      * @author Bjørn Snoen <bjorn.snoen@visma.com>
      */
-    protected function getLolz(): array
+    protected function getLolz(int $limit, int $page): array
     {
         if (!isset($this->lolz)) {
-            $lolz = $this->lolRepository->findBy([], ['fetched' => 'DESC']);
+            $lolz = $this->lolRepository->findBy([], ['fetched' => 'DESC'], $limit, $limit * $page);
             return $lolz;
         }
         return $this->lolz;
