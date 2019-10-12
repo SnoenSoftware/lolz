@@ -13,3 +13,8 @@ services:
       - './nginx.conf:/etc/nginx/conf.d/lolz.conf'
     ports:
       - 80:80
+
+  cron:
+    build: "./dockerfiles/cron/"
+    volumes:
+      - './:/app'
