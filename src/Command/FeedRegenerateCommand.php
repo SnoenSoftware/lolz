@@ -15,7 +15,9 @@ use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class FeedRegenerateCommand extends Command
 {
@@ -63,11 +65,27 @@ class FeedRegenerateCommand extends Command
     protected function configure()
     {
         $this->setDescription('Get all feeds and dump');
+        $this->addOption(
+            'feed',
+            null,
+            InputOption::VALUE_REQUIRED,
+            'Download only this feed'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $feeds = $this->feedRepository->findAll();
+        if (!$input->getOption('feed')) {
+            $feeds = $this->feedRepository->findAll();
+        } else {
+            $feeds = $this->feedRepository->findByUrlPart($input->getOption('feed'));
+        }
+        if (empty($feeds)) {
+            $io = new SymfonyStyle($input, $output);
+            $io->error(sprintf('No feed found similar to "%s"', $input->getOption('feed')));
+            return 1;
+        }
+
         foreach ($feeds as $feed) {
             $this->fetch(
                 $feed,

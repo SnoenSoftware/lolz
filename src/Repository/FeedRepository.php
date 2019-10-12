@@ -19,32 +19,18 @@ class FeedRepository extends ServiceEntityRepository
         parent::__construct($registry, Feed::class);
     }
 
-    // /**
-    //  * @return Feed[] Returns an array of Feed objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param string $value
+     * @return Feed[]
+     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     */
+    public function findByUrlPart(string $value): array
     {
+        $parameter = sprintf("%s%s%s", '%', $value, '%');
         return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
+            ->where('f.url LIKE :val')
+            ->setParameter('val', $parameter)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Feed
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
