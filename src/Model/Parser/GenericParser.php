@@ -13,6 +13,7 @@ use App\Model\Api\ParserAbstract;
 use PHPHtmlParser\Dom;
 use PHPHtmlParser\Exceptions\ChildNotFoundException;
 use PHPHtmlParser\Exceptions\CircularException;
+use PHPHtmlParser\Exceptions\NotLoadedException;
 use PHPHtmlParser\Exceptions\StrictException;
 use Zend\Feed\Reader\Entry\EntryInterface;
 use Zend\Feed\Reader\Feed\FeedInterface;
@@ -59,6 +60,7 @@ class GenericParser extends ParserAbstract
             $lol->setVideoSources($videos)->setImageUrl($next->getLink());
         } else {
             $lol->setImageUrl($this->getImageUrl($dom));
+            $lol->setCaption($this->getImageTitle($dom));
         }
 
         $lol->setFetched($this->getNow())->setUrl($next->getLink())->setTitle($next->getTitle());
@@ -101,13 +103,42 @@ class GenericParser extends ParserAbstract
 
     private function getImageUrl(Dom $dom): string
     {
-        $imgs = $dom->find('img');
-        if ($imgs->count() == 0) {
+        $img = $this->getImage($dom);
+        if (is_null($img)) {
             return "";
+        }
+        return $img->getTag()->getAttribute('src')['value'];
+    }
+
+    private function getImageTitle(Dom $dom): ?string
+    {
+        $img = $this->getImage($dom);
+        if (is_null($img)) {
+            return null;
+        }
+        $title = $img->getTag()->getAttribute('title') ?? $img->getTag()->getAttribute('alt');
+
+        return $title ? $title['value'] : '';
+    }
+
+    /**
+     * @param Dom $dom
+     * @return Dom\HtmlNode|null
+     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     */
+    private function getImage(Dom $dom): ?Dom\HtmlNode
+    {
+        try {
+            $imgs = $dom->find('img');
+        } catch (\Exception $e) {
+            return null;
+        }
+        if ($imgs->count() == 0) {
+            return null;
         }
         /** @var Dom\HtmlNode $img */
         $img = $imgs->getIterator()->current();
-        return $img->getTag()->getAttribute('src')['value'];
+        return $img;
     }
 
     /**
