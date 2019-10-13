@@ -44,6 +44,10 @@ class InstallKnownFeeds extends Command
             'url' => 'https://thecodinglove.com/feed',
             'parser' => GenericParser::class
         ],
+        [
+            'url' => 'https://www.smbc-comics.com/comic/rss',
+            'parser' => GenericParser::class
+        ]
     ];
 
     public function __construct(
