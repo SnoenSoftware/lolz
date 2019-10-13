@@ -1,0 +1,5 @@
+<video autoplay loop playsinline controls>
+    {% for source in lol.videoSources %}
+        <source src="{{ source.src }}" type="{{ source.type }}">
+    {% endfor %}
+</video>

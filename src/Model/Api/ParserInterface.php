@@ -9,6 +9,7 @@ namespace App\Model\Api;
 
 
 use App\Entity\Lol;
+use App\Model\Parser\Exceptions\InvalidConfigurationException;
 use Psr\Http\Message\ResponseInterface;
 
 interface ParserInterface
@@ -21,6 +22,7 @@ interface ParserInterface
 
 
     /**
+     * @throws InvalidConfigurationException
      * @return Lol
      * @author Bjørn Snoen <bjorn.snoen@visma.com>
      */

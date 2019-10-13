@@ -48,6 +48,11 @@ class Lol
      */
     private $title;
 
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $videoSources = [];
+
     /** @var string */
     private $content;
 
@@ -134,5 +139,17 @@ class Lol
     public function getContent(): string
     {
         return $this->content ?? sprintf('<img src="%s" title="%s"/>', $this->getImageUrl(), $this->getCaption());
+    }
+
+    public function getVideoSources(): ?array
+    {
+        return $this->videoSources;
+    }
+
+    public function setVideoSources(?array $videoSources): self
+    {
+        $this->videoSources = $videoSources;
+
+        return $this;
     }
 }

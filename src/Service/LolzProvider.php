@@ -40,19 +40,25 @@ class LolzProvider
      * @var Reddit
      */
     private $reddit;
+    /**
+     * @var VideoRenderer
+     */
+    private $videoRenderer;
 
     public function __construct(
         LolRepository $lolRepository,
         Twitter $twitter,
         Youtube $youtube,
         Imgur $imgur,
-        Reddit $reddit
+        Reddit $reddit,
+        VideoRenderer $videoRenderer
     ) {
         $this->lolRepository = $lolRepository;
         $this->twitter = $twitter;
         $this->youtube = $youtube;
         $this->imgur = $imgur;
         $this->reddit = $reddit;
+        $this->videoRenderer = $videoRenderer;
     }
 
     /**
@@ -75,6 +81,8 @@ class LolzProvider
                 $lol->setContent($this->imgur->getContent($lol));
             } elseif ($this->reddit->isVideo($lol) || $this->reddit->isNotImage($lol)) {
                 $lol->setContent($this->reddit->embedComment($lol));
+            } elseif ($lol->getVideoSources()) {
+                $lol->setContent($this->videoRenderer->render($lol));
             }
             yield $lol;
         }

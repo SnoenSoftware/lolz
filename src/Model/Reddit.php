@@ -38,7 +38,8 @@ class Reddit
 
     public function isNotImage(Lol $lol): bool
     {
-        return !pathinfo($lol->getImageUrl(), PATHINFO_EXTENSION);
+        $url = $lol->getImageUrl();
+        return !pathinfo($url, PATHINFO_EXTENSION) && strpos($url, 'reddit.com') !== false;
     }
 
     /**
