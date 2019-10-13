@@ -70,7 +70,7 @@ class LolzProvider
      * @throws \Twig\Error\SyntaxError
      * @author bjorn
      */
-    public function next(int $limit = 300, int $page = 0): \Generator
+    public function next(int $limit = 30, int $page = 0): \Generator
     {
         foreach ($this->getLolz($limit, $page) as $lol) {
             if ($this->twitter->isTweet($lol)) {
