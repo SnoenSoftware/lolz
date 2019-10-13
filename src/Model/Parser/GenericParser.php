@@ -79,7 +79,7 @@ class GenericParser extends ParserAbstract
         }
         $returnSources = [];
 
-        if (!empty($videos)) {
+        if (!empty($videos) && $videos->count() > 0) {
             /** @var Dom\HtmlNode $video */
             $video = $videos->getIterator()->current();
             try {
@@ -101,7 +101,13 @@ class GenericParser extends ParserAbstract
 
     private function getImageUrl(Dom $dom): string
     {
-
+        $imgs = $dom->find('img');
+        if ($imgs->count() == 0) {
+            return "";
+        }
+        /** @var Dom\HtmlNode $img */
+        $img = $imgs->getIterator()->current();
+        return $img->getTag()->getAttribute('src')['value'];
     }
 
     /**
