@@ -9,7 +9,6 @@ namespace App\Command;
 
 
 use App\Entity\Feed;
-use App\Entity\Lol;
 use App\Model\Parser\DevHumorParser;
 use App\Model\Parser\GenericParser;
 use App\Model\Parser\RedditParser;
@@ -30,7 +29,7 @@ class InstallKnownFeeds extends Command
 
     protected $knownFeeds = [
         [
-            'url' => 'https://xkcd.com/rss',
+            'url' => 'https://xkcd.com/atom.xml',
             'parser' => XkcdParser::class
         ],
         [
