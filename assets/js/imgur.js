@@ -15,9 +15,21 @@
         )
             .then(data => data.json())
             .then(data => data.data)
-            .then(data=> {
-                let newNode = document.createElement('img');
-                newNode.setAttribute('src', data.link)
+            .then(data => {
+                // We could be getting an album or an image back, only way to know is to check structure
+                let newNode;
+                if (!data.hasOwnProperty('images')) {
+                    newNode = document.createElement('img');
+                    newNode.setAttribute('src', data.link);
+                } else {
+                    newNode = document.createElement('div');
+                    newNode.classList.add('imgur-album');
+                    data.images.forEach(image => {
+                        let imgNode = document.createElement('img');
+                        imgNode.setAttribute('src', image.link);
+                        newNode.append(imgNode);
+                    });
+                }
                 elem.replaceWith(newNode);
             });
     })

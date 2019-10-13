@@ -33,3 +33,11 @@ body {
 .twitter-tweet-rendered {
     margin: auto;
 }
+
+.imgur-album {
+    display: flex;
+    flex-direction: column;
+    img {
+        margin: auto;
+    }
+}

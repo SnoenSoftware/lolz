@@ -19,7 +19,7 @@ use GuzzleHttp\RequestOptions;
 class Imgur
 {
     private const CLIENT_ID = 'f51e9c749055cfd';
-    private const API_BASE = 'https://api.imgur.com/3/image/';
+    private const API_BASE = 'https://api.imgur.com/3/';
 
     /**
      * @param Lol $lol
@@ -46,7 +46,23 @@ class Imgur
         $parts = parse_url($lolUrl);
         $path = $parts['path'];
         $hash = ltrim($path, '/');
-        $response = $this->getClient()->get(self::API_BASE . $hash);
+        $response = $this->getClient()->get(self::API_BASE . '/image/' . $hash);
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    /**
+     * @param string $lolUrl
+     * @return array
+     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     */
+    public function getAlbumData(string $lolUrl): array
+    {
+        $parts = parse_url($lolUrl);
+        $path = $parts['path'];
+//        $hash = ltrim($path, '/');
+        $pathParts = explode('/', $path);
+        $hash = $pathParts[array_key_last($pathParts)];
+        $response = $this->getClient()->get(self::API_BASE . '/album/' . $hash);
         return json_decode($response->getBody()->getContents(), true);
     }
 

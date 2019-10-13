@@ -50,7 +50,12 @@ class ApiController extends AbstractController
             // It was already a real image url
             return new JsonResponse(['data' => ['link' => $statusUrl]]);
         }
-        $imageData = $imgur->getRealImageData($statusUrl);
+
+        if (strpos($statusUrl, '/a/') === false) {
+            $imageData = $imgur->getRealImageData($statusUrl);
+        } else {
+            $imageData = $imgur->getAlbumData($statusUrl);
+        }
         return new JsonResponse($imageData);
     }
 }
