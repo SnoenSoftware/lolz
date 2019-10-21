@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *     message="Already saved"
  * )
  */
-class Lol
+class Lol implements \JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -151,5 +151,25 @@ class Lol
         $this->videoSources = $videoSources;
 
         return $this;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'content' => $this->getContent(),
+            'url' => $this->getUrl(),
+            'fetched' => $this->getFetched(),
+            'imageUrl' => $this->getImageUrl(),
+            'videoSources' => $this->getVideoSources(),
+            'caption' => $this->getCaption(),
+            'title' => $this->getTitle(),
+        ];
     }
 }
