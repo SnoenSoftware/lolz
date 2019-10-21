@@ -47,7 +47,11 @@ class InstallKnownFeeds extends Command
         [
             'url' => 'https://www.smbc-comics.com/comic/rss',
             'parser' => GenericParser::class
-        ]
+        ],
+        [
+            'url' => 'https://www.commitstrip.com/en/feed/',
+            'parser' => GenericParser::class
+        ],
     ];
 
     public function __construct(
