@@ -196,7 +196,7 @@ class Lol implements \JsonSerializable
                     'type' => Type::string()
                 ],
                 'videoSources' => [
-                    'type' => Type::listOf(Type::string())
+                    'type' => Type::listOf(Type::listOf(Type::string()))
                 ],
                 'caption' => [
                     'type' => Type::string()
