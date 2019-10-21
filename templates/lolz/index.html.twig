@@ -6,7 +6,7 @@
 
     <div class="lolz-wrapper">
         {% for lol in lolz %}
-            <div class="lol">
+            <div class="lol" data-url="{{ lol.url }}">
                 <h2>{{ lol.title }}</h2>
                 {{ lol.content|raw }}
             </div>

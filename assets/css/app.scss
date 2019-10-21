@@ -14,7 +14,11 @@ body {
         text-align: center;
         max-width: 70vw;
         img{
+            cursor: pointer;
             max-width: 30vw;
+        }
+        h2{
+            cursor: pointer;
         }
         &:after{
             position: relative;
