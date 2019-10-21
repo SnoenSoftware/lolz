@@ -43,6 +43,8 @@ class GenericParser extends ParserAbstract
             $next = $feed->current();
         } catch (\ErrorException $exception) {
             return null;
+        } catch (\TypeError $exception) {
+            return null;
         }
         $feed->next();
 
