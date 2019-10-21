@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Model\Twitter;
 use Doctrine\ORM\Mapping as ORM;
+use GraphQL\Type\Definition\ObjectType;
+use GraphQL\Type\Definition\Type;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
@@ -171,5 +173,39 @@ class Lol implements \JsonSerializable
             'caption' => $this->getCaption(),
             'title' => $this->getTitle(),
         ];
+    }
+
+    /**
+     * @return ObjectType
+     */
+    public static function getGraphQlDefinition(): ObjectType
+    {
+        $lolType = new ObjectType([
+            'name' => 'Lol',
+            'fields' => [
+                'content' => [
+                    'type' => Type::nonNull(Type::string())
+                ],
+                'url' => [
+                    'type' => Type::nonNull(Type::string())
+                ],
+                'fetched' => [
+                    'type' => Type::nonNull(Type::int())
+                ],
+                'imageUrl' => [
+                    'type' => Type::string()
+                ],
+                'videoSources' => [
+                    'type' => Type::listOf(Type::string())
+                ],
+                'caption' => [
+                    'type' => Type::string()
+                ],
+                'title' => [
+                    'type' => Type::nonNull(Type::string())
+                ],
+            ]
+        ]);
+        return $lolType;
     }
 }

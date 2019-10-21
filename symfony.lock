@@ -114,6 +114,9 @@
     "lavary/crunz": {
         "version": "v2.0.1"
     },
+    "leocavalcante/siler": {
+        "version": "v1.6.0"
+    },
     "monolog/monolog": {
         "version": "1.25.1"
     },
