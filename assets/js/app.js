@@ -4,3 +4,4 @@ require('./youtube.js');
 require('./twitter.js');
 require('./imgur');
 require('./clickhandler');
+require('./scrollListener');
