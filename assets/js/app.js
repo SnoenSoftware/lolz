@@ -5,3 +5,4 @@ require('./twitter.js');
 require('./imgur');
 require('./clickhandler');
 require('./scrollListener');
+require('./more');

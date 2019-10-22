@@ -10,10 +10,14 @@ namespace App\Controller;
 
 use App\Model\Imgur;
 use App\Model\Twitter;
+use App\Service\LolzProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  * Class ApiController
@@ -57,5 +61,25 @@ class ApiController extends AbstractController
             $imageData = $imgur->getAlbumData($statusUrl);
         }
         return new JsonResponse($imageData);
+    }
+
+    /**
+     * @Route("/api/more/page/{page}", name="more", requirements={"page"="\d+"})
+     * @param int $page
+     * @param LolzProvider $lolzProvider
+     * @return JsonResponse
+     */
+    public function moreLolz(LolzProvider $lolzProvider, int $page = 0): JsonResponse
+    {
+        try {
+            $lolz = $lolzProvider->next(30, $page);
+        } catch (\Exception $e) {
+            $lolz = [];
+        }
+        $asArray = [];
+        foreach ($lolz as $lol) {
+            $asArray[] = $lol;
+        }
+        return new JsonResponse($asArray);
     }
 }
