@@ -18,7 +18,7 @@ const loadMoreLolz = () => {
             newElement.insertBefore(header, newElement.childNodes[0]);
             wrapper.append(newElement);
         }));
-        if (document.querySelectorAll('lol').length < 5 && lolz.length === 30) {
+        if (document.querySelectorAll('.lol').length < 5 && lolz.length === 30) {
             loadMoreLolz();
         }
     });
