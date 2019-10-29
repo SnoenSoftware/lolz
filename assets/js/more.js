@@ -20,6 +20,13 @@ const loadMoreLolz = () => {
         }));
         if (document.querySelectorAll('.lol').length < 5 && lolz.length === 30) {
             loadMoreLolz();
+        } else if (document.querySelectorAll('.lol').length === 0) {
+            let wrapper = document.createElement('div');
+            wrapper.classList.add('eof');
+            let newElement = document.createElement('h1');
+            newElement.innerText = "No more lolz to give, come back later";
+            wrapper.append(newElement);
+            document.querySelector('body').append(wrapper);
         }
     });
     window.currentPage += 1;
