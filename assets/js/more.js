@@ -5,7 +5,7 @@ const getMoreLolz = (page) => {
 };
 
 const loadMoreLolz = () => {
-    window.currentPage = window.currentPage || 1;
+    window.currentPage = window.currentPage || 0;
     let promise = getMoreLolz(window.currentPage).then(lolz => lolz.json()).then(lolz => {
         lolz.forEach(lol => ifLolIsUnseen(lol, () => {
             let wrapper = document.querySelector('.lolz-wrapper');
