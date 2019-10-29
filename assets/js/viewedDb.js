@@ -16,3 +16,46 @@ import { openDB } from 'idb';
         }
     });
 })();
+
+const getDbPromise = () => {
+    return openDB('viewedDb', 1);
+};
+
+const saveLolAsViewed = (lol) => {
+    let url = lol.dataset.url;
+    let viewedTime = Date.now();
+    let dbPromise = getDbPromise();
+    dbPromise.then((db) => {
+        let transaction = db.transaction('viewed', 'readwrite');
+        let store = transaction.objectStore('viewed');
+        store.add({
+            lolurl: url,
+            viewed: viewedTime
+        })
+    });
+};
+
+const runCallbackOnLolIfSeenOrNot = (lol, seenOrNot, callback) => {
+    let dbPromise = getDbPromise();
+    dbPromise.then((db) => {
+        let transaction = db.transaction('viewed', 'readonly');
+        let store = transaction.objectStore('viewed');
+        let url = lol.dataset ? lol.dataset.url : lol.url;
+        store.get(url).then(val => {
+            val = seenOrNot ? val : !val;
+            if (val) {
+                callback(lol);
+            }
+        });
+    });
+};
+
+const ifLolHasBeenSeen = (lol, callback) => {
+    runCallbackOnLolIfSeenOrNot(lol, true, callback);
+};
+
+const ifLolIsUnseen = (lol, callback) => {
+    runCallbackOnLolIfSeenOrNot(lol, false, callback);
+};
+
+export {saveLolAsViewed, ifLolHasBeenSeen, ifLolIsUnseen};

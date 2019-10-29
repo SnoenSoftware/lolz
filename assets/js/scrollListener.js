@@ -1,5 +1,6 @@
 require('./viewedDb');
-import {openDB} from 'idb';
+import loadMoreLolz from "./more";
+import {saveLolAsViewed, ifLolHasBeenSeen} from "./viewedDb";
 
 (function(){
     const elementScrolled = (elem) => {
@@ -16,23 +17,6 @@ import {openDB} from 'idb';
         });
     };
 
-    const getDbPromise = () => {
-        return openDB('viewedDb', 1);
-    };
-
-    const saveLolAsViewed = (lol) => {
-        let url = lol.dataset.url;
-        let viewedTime = Date.now();
-        let dbPromise = getDbPromise();
-        dbPromise.then((db) => {
-            let transaction = db.transaction('viewed', 'readwrite');
-            let store = transaction.objectStore('viewed');
-            store.add({
-                lolurl: url,
-                viewed: viewedTime
-            })
-        });
-    };
 
     const hideOutOfViewLolz = () => {
         Array.from(document.querySelectorAll('.in-view'), elem => {
@@ -46,23 +30,24 @@ import {openDB} from 'idb';
 
     const removeAlreadySeenLolz = () => {
         let lolz = document.querySelectorAll('.lol');
-        let dbPromise = getDbPromise();
-        dbPromise.then((db) => {
-            let transaction = db.transaction('viewed', 'readonly');
-            let store = transaction.objectStore('viewed');
-            Array.from(lolz).forEach(lol => {
-                store.get(lol.dataset.url).then(val => {
-                    if (val) {
-                        lol.remove();
-                    }
-                });
-            });
+        Array.from(lolz).forEach(lol => {
+            ifLolHasBeenSeen(lol, () => {lol.remove()});
         });
     };
 
     document.addEventListener('scroll', event => {
         refreshInViewClasses();
         hideOutOfViewLolz();
+    });
+
+    window.mutationListener = new MutationObserver(() => {
+        if (document.querySelectorAll('.lol').length === 0) {
+            loadMoreLolz().then(() => removeAlreadySeenLolz());
+        }
+    });
+
+    window.mutationListener.observe(document.querySelector('.lolz-wrapper'), {
+        childList: true
     });
 
     refreshInViewClasses();
