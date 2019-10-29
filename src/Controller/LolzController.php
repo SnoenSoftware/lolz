@@ -4,19 +4,17 @@ namespace App\Controller;
 
 use App\Service\LolzProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class LolzController extends AbstractController
 {
     /**
      * @Route("/", name="lolz")
-     * @param LolzProvider $lolzProvider
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
-    public function index(LolzProvider $lolzProvider)
+    public function index()
     {
-        return $this->render('lolz/index.html.twig', [
-            'lolz' => $lolzProvider->next()
-        ]);
+        return $this->render('lolz/index.html.twig');
     }
 }

@@ -1,3 +1,5 @@
+import loadMoreLolz from "./more";
+
 require('../css/app.scss');
 
 window.scrollTo(0, 0);
@@ -8,3 +10,5 @@ require('./imgur');
 require('./clickhandler');
 require('./scrollListener');
 require('./more');
+
+loadMoreLolz();

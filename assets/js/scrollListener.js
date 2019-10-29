@@ -35,9 +35,17 @@ import {saveLolAsViewed, ifLolHasBeenSeen} from "./viewedDb";
         });
     };
 
-    document.addEventListener('scroll', event => {
+    document.addEventListener('scroll', () => {
         refreshInViewClasses();
         hideOutOfViewLolz();
+    });
+
+    document.addEventListener('wheel', (event) => {
+        if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight && event.deltaY > 0) {
+            Array.from(document.querySelectorAll('.lol')).forEach((lol) => {
+                saveLolAsViewed(lol);
+            });
+        }
     });
 
     window.mutationListener = new MutationObserver(() => {
