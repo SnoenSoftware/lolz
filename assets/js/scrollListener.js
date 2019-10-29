@@ -38,6 +38,10 @@ import {saveLolAsViewed, ifLolHasBeenSeen} from "./viewedDb";
     document.addEventListener('scroll', () => {
         refreshInViewClasses();
         hideOutOfViewLolz();
+        let visibleLolz = document.querySelectorAll('.lol').length;
+        if (visibleLolz <= 10) {
+            loadMoreLolz();
+        }
     });
 
     document.addEventListener('wheel', (event) => {

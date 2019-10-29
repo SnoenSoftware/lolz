@@ -26,11 +26,4 @@ const loadMoreLolz = () => {
     return promise;
 };
 
-document.addEventListener('scroll', () => {
-    let visibleLolz = document.querySelectorAll('.lol').length;
-    if (visibleLolz <= 10) {
-        loadMoreLolz();
-    }
-});
-
 export default loadMoreLolz;
