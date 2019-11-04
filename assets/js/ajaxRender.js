@@ -6,6 +6,7 @@ const ajaxRender = () => {
     loadImgur();
     renderReddits();
     renderTweets();
+    window.onYouTubePlayerAPIReady();
 };
 
 export default ajaxRender;
