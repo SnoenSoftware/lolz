@@ -19,7 +19,7 @@ const loadMoreLolz = () => {
             wrapper.append(newElement);
         }));
         if (document.querySelectorAll('.lol').length < 5 && lolz.length === 30) {
-            loadMoreLolz();
+            return loadMoreLolz();
         } else if (document.querySelectorAll('.lol').length === 0) {
             let wrapper = document.createElement('div');
             wrapper.classList.add('eof');

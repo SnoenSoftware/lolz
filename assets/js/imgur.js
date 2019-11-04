@@ -1,4 +1,4 @@
-(function(){
+const loadImgur = () => {
     let apiUrl = '/api/imgur';
     let imgurs = document.querySelectorAll('imgur');
     Array.from(imgurs).forEach(function (elem) {
@@ -33,4 +33,6 @@
                 elem.replaceWith(newNode);
             });
     })
-})();
+};
+
+export {loadImgur};

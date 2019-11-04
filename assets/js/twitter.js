@@ -1,4 +1,4 @@
-(function(){
+const renderTweets = () => {
     let oembedUrl = '/api/twitter';
     let tweets = document.querySelectorAll('tweet');
     Array.from(tweets).forEach(function (elem) {
@@ -22,4 +22,6 @@
                 twttr.widgets.load();
             });
     })
-})();
+};
+
+export default renderTweets;

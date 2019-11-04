@@ -1,6 +1,8 @@
-require('./viewedDb');
 import loadMoreLolz from "./more";
 import {saveLolAsViewed, ifLolHasBeenSeen} from "./viewedDb";
+import ajaxRender from "./ajaxRender";
+
+window.scrollEventBeingHandled = false;
 
 (function(){
     const elementScrolled = (elem) => {
@@ -36,11 +38,19 @@ import {saveLolAsViewed, ifLolHasBeenSeen} from "./viewedDb";
     };
 
     document.addEventListener('scroll', () => {
+        if (window.scrollEventBeingHandled) {
+            return;
+        }
+        window.scrollEventBeingHandled = true;
         refreshInViewClasses();
         hideOutOfViewLolz();
         let visibleLolz = document.querySelectorAll('.lol').length;
         if (visibleLolz <= 10) {
-            loadMoreLolz();
+            loadMoreLolz().then(() => {
+                ajaxRender();
+            }).finally(() => {window.scrollEventBeingHandled = false});
+        } else {
+            window.scrollEventBeingHandled = false;
         }
     });
 
@@ -50,16 +60,6 @@ import {saveLolAsViewed, ifLolHasBeenSeen} from "./viewedDb";
                 saveLolAsViewed(lol);
             });
         }
-    });
-
-    window.mutationListener = new MutationObserver(() => {
-        if (document.querySelectorAll('.lol').length === 0) {
-            loadMoreLolz().then(() => removeAlreadySeenLolz());
-        }
-    });
-
-    window.mutationListener.observe(document.querySelector('.lolz-wrapper'), {
-        childList: true
     });
 
     refreshInViewClasses();
