@@ -3,6 +3,7 @@ import {saveLolAsViewed, ifLolHasBeenSeen} from "./viewedDb";
 import ajaxRender from "./ajaxRender";
 
 window.scrollEventBeingHandled = false;
+window.lastScrollTop = 0;
 
 (function(){
     const elementScrolled = (elem) => {
@@ -37,11 +38,17 @@ window.scrollEventBeingHandled = false;
         });
     };
 
-    document.addEventListener('scroll', () => {
+    document.addEventListener('scroll', (event) => {
         if (window.scrollEventBeingHandled) {
             return;
         }
         window.scrollEventBeingHandled = true;
+        let st = window.pageYOffset || document.documentElement.scrollTop;
+        if (st < window.lastScrollTop){
+            window.scrollEventBeingHandled = false;
+            return; // Do not handle scrolling upwards
+        }
+        window.lastScrollTop = st <= 0 ? 0 : st;
         refreshInViewClasses();
         hideOutOfViewLolz();
         let visibleLolz = document.querySelectorAll('.lol').length;
