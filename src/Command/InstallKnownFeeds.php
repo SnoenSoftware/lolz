@@ -18,6 +18,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Throwable;
 
 class InstallKnownFeeds extends Command
 {
@@ -68,8 +69,13 @@ class InstallKnownFeeds extends Command
             $feed->setParser($knownFeed['parser'])->setUrl($knownFeed['url']);
             $this->entityManager->persist($feed);
         }
-        $this->entityManager->flush();
         $io = new SymfonyStyle($input, $output);
-        $io->success(":)");
+        try {
+            $this->entityManager->flush();
+            $io->success(":)");
+        } catch (Throwable $t) {
+            // Probably already installed, whatever
+            $io->warning("Couldn't install feeds, probably already installed");
+        }
     }
 }
