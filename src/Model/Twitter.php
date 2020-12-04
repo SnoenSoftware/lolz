@@ -1,7 +1,7 @@
 <?php
 /**
  * @license Proprietary
- * @author Bjørn Snoen <bjorn.snoen@visma.com>
+ * @author Bjørn Snoen <bjorn.snoen@gmail.com>
  * @copyright Visma Digital Commerce 2019
  */
 
@@ -14,7 +14,7 @@ use GuzzleHttp\RequestOptions;
 
 /**
  * Class Twitter
- * @author Bjørn Snoen <bjorn.snoen@visma.com>
+ * @author Bjørn Snoen <bjorn.snoen@gmail.com>
  */
 class Twitter
 {
@@ -22,7 +22,7 @@ class Twitter
     /**
      * @param Lol $lol
      * @return bool
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     public function isTweet(Lol $lol): bool
     {

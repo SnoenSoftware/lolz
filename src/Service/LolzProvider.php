@@ -1,7 +1,7 @@
 <?php
 /**
  * @license Proprietary
- * @author Bjørn Snoen <bjorn.snoen@visma.com>
+ * @author Bjørn Snoen <bjorn.snoen@gmail.com>
  * @copyright Visma Digital Commerce 2019
  */
 
@@ -92,7 +92,7 @@ class LolzProvider
      * @param int $limit
      * @param int $page
      * @return Lol[]
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     protected function getLolz(int $limit, int $page): array
     {

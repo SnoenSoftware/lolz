@@ -126,7 +126,7 @@ class Lol implements \JsonSerializable
     /**
      * @param string $content
      * @return Lol
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     public function setContent(string $content): self
     {
@@ -136,7 +136,7 @@ class Lol implements \JsonSerializable
 
     /**
      * @return string
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     public function getContent(): string
     {

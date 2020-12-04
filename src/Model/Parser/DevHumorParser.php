@@ -1,7 +1,7 @@
 <?php
 /**
  * @license Proprietary
- * @author Bjørn Snoen <bjorn.snoen@visma.com>
+ * @author Bjørn Snoen <bjorn.snoen@gmail.com>
  * @copyright Visma Digital Commerce 2019
  */
 
@@ -27,7 +27,7 @@ class DevHumorParser extends ParserAbstract
 
     /**
      * @return Lol
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     public function next(): ?Lol
     {
@@ -55,7 +55,7 @@ class DevHumorParser extends ParserAbstract
 
     /**
      * @return \SimpleXMLElement
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     protected function getCurrentItem(): \SimpleXMLElement
     {
@@ -65,7 +65,7 @@ class DevHumorParser extends ParserAbstract
     /**
      * @param int $pointer
      * @return \SimpleXMLElement
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     protected function getItem(int $pointer): \SimpleXMLElement
     {
@@ -74,7 +74,7 @@ class DevHumorParser extends ParserAbstract
 
     /**
      * @return \SimpleXMLElement
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     protected function getFeed(): \SimpleXMLElement
     {
@@ -93,7 +93,7 @@ class DevHumorParser extends ParserAbstract
      * @throws \PHPHtmlParser\Exceptions\CurlException
      * @throws \PHPHtmlParser\Exceptions\NotLoadedException
      * @throws \PHPHtmlParser\Exceptions\StrictException
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     protected function fetchImage(string $url): string
     {
@@ -112,7 +112,7 @@ class DevHumorParser extends ParserAbstract
 
     /**
      * @return Client
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     protected function getClient(): Client
     {

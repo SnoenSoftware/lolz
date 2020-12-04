@@ -1,7 +1,7 @@
 <?php
 /**
  * @license Proprietary
- * @author Bjørn Snoen <bjorn.snoen@visma.com>
+ * @author Bjørn Snoen <bjorn.snoen@gmail.com>
  * @copyright Visma Digital Commerce 2019
  */
 
@@ -21,7 +21,7 @@ use Zend\Feed\Reader\Reader;
 
 /**
  * Class GenericParser
- * @author Bjørn Snoen <bjorn.snoen@visma.com>
+ * @author Bjørn Snoen <bjorn.snoen@gmail.com>
  */
 class GenericParser extends ParserAbstract
 {
@@ -33,7 +33,7 @@ class GenericParser extends ParserAbstract
     /**
      * @return Lol|null
      * @throws ChildNotFoundException
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     public function next(): ?Lol
     {
@@ -72,7 +72,7 @@ class GenericParser extends ParserAbstract
     /**
      * @param Dom $dom
      * @return array
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     private function getVideoSources(Dom $dom): array
     {
@@ -126,7 +126,7 @@ class GenericParser extends ParserAbstract
     /**
      * @param Dom $dom
      * @return Dom\HtmlNode|null
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     private function getImage(Dom $dom): ?Dom\HtmlNode
     {
@@ -145,7 +145,7 @@ class GenericParser extends ParserAbstract
 
     /**
      * @return FeedInterface
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     protected function getFeed()
     {

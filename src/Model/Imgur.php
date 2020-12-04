@@ -53,7 +53,7 @@ class Imgur
     /**
      * @param string $lolUrl
      * @return array
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     public function getAlbumData(string $lolUrl): array
     {

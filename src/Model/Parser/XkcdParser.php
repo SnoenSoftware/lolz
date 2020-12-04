@@ -1,7 +1,7 @@
 <?php
 /**
  * @license Proprietary
- * @author Bjørn Snoen <bjorn.snoen@visma.com>
+ * @author Bjørn Snoen <bjorn.snoen@gmail.com>
  * @copyright Visma Digital Commerce 2019
  */
 
@@ -12,7 +12,7 @@ use App\Model\Api\ParserAbstract;
 
 /**
  * Class XkcdParser
- * @author Bjørn Snoen <bjorn.snoen@visma.com>
+ * @author Bjørn Snoen <bjorn.snoen@gmail.com>
  */
 class XkcdParser extends ParserAbstract
 {
@@ -34,7 +34,7 @@ class XkcdParser extends ParserAbstract
 
     /**
      * @return Lol|null
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     public function next(): ?Lol
     {
@@ -61,7 +61,7 @@ class XkcdParser extends ParserAbstract
 
     /**
      * @return string
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     protected function getImageUrl(): string
     {
@@ -74,7 +74,7 @@ class XkcdParser extends ParserAbstract
 
     /**
      * @return string
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     protected function getUrl(): string
     {
@@ -83,7 +83,7 @@ class XkcdParser extends ParserAbstract
 
     /**
      * @return string|null
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      * @throws \Exception
      */
     protected function getCaption(): ?string
@@ -102,7 +102,7 @@ class XkcdParser extends ParserAbstract
 
     /**
      * @return \SimpleXMLElement
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      * @throws \Exception
      */
     protected function getSummary(): \SimpleXMLElement

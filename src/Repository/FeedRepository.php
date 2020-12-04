@@ -22,7 +22,7 @@ class FeedRepository extends ServiceEntityRepository
     /**
      * @param string $value
      * @return Feed[]
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     public function findByUrlPart(string $value): array
     {

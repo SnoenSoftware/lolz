@@ -1,7 +1,7 @@
 <?php
 /**
  * @license Proprietary
- * @author Bjørn Snoen <bjorn.snoen@visma.com>
+ * @author Bjørn Snoen <bjorn.snoen@gmail.com>
  * @copyright Visma Digital Commerce 2019
  */
 
@@ -12,7 +12,7 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class ParserAbstract
- * @author Bjørn Snoen <bjorn.snoen@visma.com>
+ * @author Bjørn Snoen <bjorn.snoen@gmail.com>
  */
 abstract class ParserAbstract implements ParserInterface
 {
@@ -32,7 +32,7 @@ abstract class ParserAbstract implements ParserInterface
 
     /**
      * @return ResponseInterface
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     protected function getResponse(): ResponseInterface
     {
@@ -42,7 +42,7 @@ abstract class ParserAbstract implements ParserInterface
     /** @noinspection PhpDocMissingThrowsInspection */
     /**
      * @return \DateTimeImmutable
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     protected function getNow(): \DateTimeImmutable
     {

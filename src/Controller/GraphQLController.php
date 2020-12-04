@@ -1,6 +1,6 @@
 <?php
 /**
- * @author Bjørn Snoen <bjorn.snoen@visma.com>
+ * @author Bjørn Snoen <bjorn.snoen@gmail.com>
  * @license proprietary
  */
 

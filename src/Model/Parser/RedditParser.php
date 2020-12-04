@@ -1,7 +1,7 @@
 <?php
 /**
  * @license Proprietary
- * @author Bjørn Snoen <bjorn.snoen@visma.com>
+ * @author Bjørn Snoen <bjorn.snoen@gmail.com>
  * @copyright Visma Digital Commerce 2019
  */
 
@@ -25,7 +25,7 @@ class RedditParser extends ParserAbstract
 
     /**
      * @return Lol|null
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     public function next(): ?Lol
     {
@@ -55,7 +55,7 @@ class RedditParser extends ParserAbstract
     /**
      * @param int $pointer
      * @return \SimpleXMLElement|null
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     protected function getItem(int $pointer): ?\SimpleXMLElement
     {
@@ -64,7 +64,7 @@ class RedditParser extends ParserAbstract
 
     /**
      * @return \SimpleXMLElement
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     protected function getFeed(): \SimpleXMLElement
     {
@@ -83,7 +83,7 @@ class RedditParser extends ParserAbstract
      * @throws \PHPHtmlParser\Exceptions\NotLoadedException
      * @throws \PHPHtmlParser\Exceptions\StrictException
      * @throws \PHPHtmlParser\Exceptions\UnknownChildTypeException
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     private function extractImageHref(?\SimpleXMLElement $current): ?string
     {

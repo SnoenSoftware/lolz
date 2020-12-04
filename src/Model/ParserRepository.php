@@ -1,7 +1,7 @@
 <?php
 /**
  * @license Proprietary
- * @author Bjørn Snoen <bjorn.snoen@visma.com>
+ * @author Bjørn Snoen <bjorn.snoen@gmail.com>
  * @copyright Visma Digital Commerce 2019
  */
 
@@ -19,7 +19,7 @@ class ParserRepository
      * @param Feed $feed
      * @param ResponseInterface $response
      * @return ParserInterface
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     public function getParserForFeed(Feed $feed, ResponseInterface $response): ParserInterface
     {
@@ -33,7 +33,7 @@ class ParserRepository
     /**
      * @return string[]
      * @throws \ReflectionException
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     public function getParsers(): array
     {
@@ -60,7 +60,7 @@ class ParserRepository
      * @param string $className
      * @return bool
      * @throws \ReflectionException
-     * @author Bjørn Snoen <bjorn.snoen@visma.com>
+     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     protected function isRealParser(string $className): bool
     {
