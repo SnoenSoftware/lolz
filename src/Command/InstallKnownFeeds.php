@@ -77,5 +77,6 @@ class InstallKnownFeeds extends Command
             // Probably already installed, whatever
             $io->warning("Couldn't install feeds, probably already installed");
         }
+        return 0;
     }
 }

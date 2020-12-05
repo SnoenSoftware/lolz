@@ -35,5 +35,6 @@ class TestGenericFeedWithUrl extends Command
         while ($lol = $parser->next()) {
             print_r($lol);
         }
+        return 0;
     }
 }

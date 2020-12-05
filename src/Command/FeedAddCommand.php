@@ -47,7 +47,7 @@ class FeedAddCommand extends Command
 
         if (!$validUrl) {
             $io->error("Invalid url {$url}");
-            return;
+            return 1;
         }
 
         $question = new Question("Which parser should we use?", GenericParser::class);
@@ -61,5 +61,6 @@ class FeedAddCommand extends Command
         $this->entityManager->flush();
 
         $io->success('Added feed');
+        return 0;
     }
 }

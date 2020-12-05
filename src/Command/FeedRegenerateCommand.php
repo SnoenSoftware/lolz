@@ -108,6 +108,7 @@ class FeedRegenerateCommand extends Command
             }
         }
         $this->entityManager->flush();
+        return 0;
     }
 
     protected function fetch(Feed $feed, \Closure $onFetched)

@@ -1,10 +1,11 @@
 {
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.28.0",
+        "@symfony/stimulus-bridge": "^1.0.0",
+        "@symfony/webpack-encore": "^0.32.0",
         "core-js": "^3.0.0",
-        "node-sass": "^4.12.0",
         "regenerator-runtime": "^0.13.2",
-        "sass-loader": "^7.0.1",
+        "sass-loader": "^10.0.1",
+        "stimulus": "^1.1.1",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -16,6 +17,8 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "idb": "^4.0.5"
+        "@babel/plugin-proposal-class-properties": "^7.12.1",
+        "idb": "^5.0.8",
+        "node-sass": "^5.0.0"
     }
 }
