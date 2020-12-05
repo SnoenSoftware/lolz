@@ -2,7 +2,7 @@
 /**
  * @license Proprietary
  * @author bjorn
- * @copyright Visma Digital Commerce 2019
+ * @copyright BRBcoffee 2020
  */
 
 namespace App\Controller;

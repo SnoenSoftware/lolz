@@ -2,7 +2,7 @@
 /**
  * @license Proprietary
  * @author Bjørn Snoen <bjorn.snoen@gmail.com>
- * @copyright Visma Digital Commerce 2019
+ * @copyright BRBcoffee 2020
  */
 
 namespace App\Model;
