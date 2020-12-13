@@ -1,2 +1,2 @@
-* * * * * cd /app && PATH=/usr/local/bin:$PATH php vendor/bin/crunz schedule:run >> /var/log/cron.log 2>&1
+* * * * * cd /app && PATH=/usr/local/bin:$PATH php vendor/bin/crunz schedule:run
 # Empty line which is required apparently
