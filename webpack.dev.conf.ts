@@ -1,5 +1,6 @@
 import * as webpack from "webpack";
 import * as path from "path";
+const RemovePlugin = require('remove-files-webpack-plugin');
 
 const config: webpack.Configuration = {
     devtool: "eval-source-map",
@@ -26,7 +27,19 @@ const config: webpack.Configuration = {
                 ]
             }
         ]
-    }
+    },
+    plugins: [new RemovePlugin({
+        watch: {
+            include: [
+                "./public/build/main.css"
+            ]
+        },
+        before: {
+            include: [
+                "./public/build/main.css"
+            ]
+        }
+    })]
 };
 
 export default config;
