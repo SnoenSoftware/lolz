@@ -1,5 +1,6 @@
 import * as webpack from "webpack";
 import * as path from "path";
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config: webpack.Configuration = {
     mode: "production",
@@ -19,13 +20,14 @@ const config: webpack.Configuration = {
             {
                 test: /\.s[ac]ss?$/,
                 use: [
-                    "style-loader",
+                    MiniCssExtractPlugin.loader,
                     "css-loader",
                     "sass-loader"
                 ]
             }
-        ]
-    }
+        ],
+    },
+    plugins: [new MiniCssExtractPlugin()]
 };
 
 export default config;
