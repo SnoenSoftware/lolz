@@ -10,12 +10,21 @@ body {
 
     .lol {
         margin: auto;
-        padding: 2rem;
         text-align: center;
-        max-width: 70vw;
+        max-width: 95vw;
+        @media screen and (max-width: 880px) {
+            min-width: 95vw;
+        }
         img {
+            width: 90%;
             cursor: pointer;
-            max-width: 30vw;
+        }
+        @media screen and (min-width: 1024px){
+            max-width: 70vw;
+            padding: 2rem;
+            img {
+                max-width: 30vw;
+            }
         }
         h2 {
             cursor: pointer;
