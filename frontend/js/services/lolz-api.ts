@@ -1,5 +1,4 @@
 import { seen } from "./viewedDb";
-import { useState } from "react";
 
 interface IServerDate {
     date: string;
