@@ -32,7 +32,6 @@
         "symfony/twig-bundle": "5.2.*",
         "symfony/validator": "5.2.*",
         "symfony/web-link": "5.2.*",
-        "symfony/webpack-encore-bundle": "^1.6",
         "symfony/yaml": "5.2.*",
         "webonyx/graphql-php": "^0.13.8",
         "zendframework/zend-feed": "^2.12"
@@ -70,8 +69,7 @@
     },
     "scripts": {
         "auto-scripts": {
-            "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "cache:clear": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"

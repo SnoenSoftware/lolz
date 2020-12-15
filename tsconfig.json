@@ -1,0 +1,9 @@
+{
+  "include": ["frontend/**/*"],
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "jsx": "react",
+    "allowJs": true,
+    "lib": ["ES5", "ES6", "DOM"]
+  }
+}
