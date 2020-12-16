@@ -24,6 +24,14 @@ const useOnScreen = (ref: MutableRefObject<any>) => {
     return isIntersecting;
 };
 
+const clickHandler = (loldata: IServerLol) => {
+        let url = loldata.url;
+        if (url) {
+            window.open(url, '_blank');
+        }
+};
+
+
 const Lol = (props: LolProps) => {
     const refBox = useRef();
     const isOnScreen = useOnScreen(refBox);
@@ -42,7 +50,7 @@ const Lol = (props: LolProps) => {
             ref={refBox}
             className={"lol"}
             data-url={props.lolData.url}
-            onClick={() => props.unloadCallback(props.lolData.url)}
+            onClick={() => clickHandler(props.lolData)}
         >
             <h2>{props.lolData.title}</h2>
             <div dangerouslySetInnerHTML={{ __html: props.lolData.content }} />
