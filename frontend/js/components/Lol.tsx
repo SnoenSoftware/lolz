@@ -25,12 +25,11 @@ const useOnScreen = (ref: MutableRefObject<any>) => {
 };
 
 const clickHandler = (loldata: IServerLol) => {
-        let url = loldata.url;
-        if (url) {
-            window.open(url, '_blank');
-        }
+    let url = loldata.url;
+    if (url) {
+        window.open(url, "_blank");
+    }
 };
-
 
 const Lol = (props: LolProps) => {
     const refBox = useRef();
