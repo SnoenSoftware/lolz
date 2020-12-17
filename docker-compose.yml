@@ -2,32 +2,20 @@ version: "3"
 
 services:
   php:
-    build:
-      context: "./"
-      dockerfile: "./dockerfiles/Dockerfile"
-      target: fpm
-    image: "brbcoffee/lolz-fpm"
+    image: "registry.digitalocean.com/brbcoffee/site:lolz-fpm"
     volumes:
       - './data:/var/www/project/data'
     environment:
       APP_ENV: "prod"
 
   nginx:
-    build:
-      context: "./"
-      dockerfile: "./dockerfiles/Dockerfile"
-      target: proxy
-    image: 'brbcoffee/lolz-nginx'
+    image: 'registry.digitalocean.com/brbcoffee/site:lolz-proxy'
     ports:
       - 80:80
-    environment:
-      APP_ENV: "prod"
 
   cron:
-    build:
-      context: "./"
-      dockerfile: "./dockerfiles/Dockerfile"
-      target: cron
-    image: 'brbcoffee/lolz-cron'
+    image: 'registry.digitalocean.com/brbcoffee/site:lolz-cron'
     volumes:
       - './data:/app/data'
+    environment:
+      APP_ENV: "prod"
