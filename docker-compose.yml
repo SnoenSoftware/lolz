@@ -4,7 +4,7 @@ services:
   php:
     image: "registry.digitalocean.com/brbcoffee/site:lolz-fpm"
     volumes:
-      - './data:/var/www/project/data'
+      - './data:/var/www/lolz/data'
     environment:
       APP_ENV: "prod"
 

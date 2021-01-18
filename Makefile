@@ -19,3 +19,6 @@ run: prod
 
 down:
 	docker-compose down
+
+clean: down
+	rm -rf data/db.sqlite node_modules vendor
