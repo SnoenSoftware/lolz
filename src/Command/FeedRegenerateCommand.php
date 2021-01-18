@@ -6,6 +6,7 @@ use App\Entity\Feed;
 use App\Model\ParserRepository;
 use App\Repository\FeedRepository;
 use App\Repository\LolRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -75,13 +76,15 @@ class FeedRegenerateCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $io = new SymfonyStyle($input, $output);
+        $io->info((new DateTime('now'))->format("[Y-m-d H:i:s] "). "Fetching feeds");
+
         if (!$input->getOption('feed')) {
             $feeds = $this->feedRepository->findAll();
         } else {
             $feeds = $this->feedRepository->findByUrlPart($input->getOption('feed'));
         }
         if (empty($feeds)) {
-            $io = new SymfonyStyle($input, $output);
             $io->error(sprintf('No feed found similar to "%s"', $input->getOption('feed')));
             return 1;
         }

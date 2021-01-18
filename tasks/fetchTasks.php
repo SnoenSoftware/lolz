@@ -20,6 +20,6 @@ $task
     ->in(dirname(__DIR__))
     ->description('Generate lolz feed')
     ->preventOverlapping()
-    ->everyMinute();
+    ->everyFiveMinutes();
 
 return $scheduler;
