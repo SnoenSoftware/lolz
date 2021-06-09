@@ -1,22 +1,20 @@
-import * as webpack from "webpack";
-import * as path from "path";
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import { Configuration } from "webpack";
+import { resolve } from "path";
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-const config: webpack.Configuration = {
-    mode: "production",
+export const coreConfig: Configuration = {
     entry: "./frontend/js/app.tsx",
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
         extensions: [".ts", ".tsx", ".js", ".json"]
     },
     output: {
-        path: path.resolve(__dirname, "public/build"),
+        path: resolve(__dirname, "../../public/build"),
         filename: "app.js"
     },
     module: {
         rules: [
-            // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-            { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+            { test: /\.tsx?$/, loader: "babel-loader" },
             {
                 test: /\.s[ac]ss?$/,
                 use: [
@@ -29,5 +27,3 @@ const config: webpack.Configuration = {
     },
     plugins: [new MiniCssExtractPlugin()]
 };
-
-export default config;

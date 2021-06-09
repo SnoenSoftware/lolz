@@ -1,8 +1,26 @@
 {
   "name": "lolz",
+  "description": "Modular lolz aggregator in symfony and react",
   "repository": "https://www.github.com/bjornsnoen/lolz",
   "license": "GPL-3.0-or-later",
-  "description": "Modular lolz aggregator in symfony and react",
+  "scripts": {
+    "dev": "webpack -c frontend/js/webpack.dev.conf.ts",
+    "watch": "webpack -c frontend/js/webpack.dev.conf.ts --watch",
+    "prod": "webpack -c frontend/js/webpack.prod.conf.ts",
+    "pretty": "prettier -w frontend"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react",
+      "@babel/preset-typescript"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-transform-runtime"
+      ]
+    ]
+  },
   "dependencies": {
     "idb": "^5.0.8",
     "react": "^17.0.1",
@@ -11,29 +29,24 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
+    "@babel/plugin-transform-runtime": "^7.14.3",
     "@babel/preset-env": "^7.12.10",
     "@babel/preset-react": "^7.12.10",
+    "@babel/preset-typescript": "^7.13.0",
+    "@types/mini-css-extract-plugin": "^1.4.3",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
-    "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.0.1",
-    "mini-css-extract-plugin": "^1.3.3",
-    "node-sass": "^5.0.0",
+    "mini-css-extract-plugin": "^1.6",
     "prettier": "^2.2.1",
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
     "ts-node": "^9.1.1",
-    "typescript": "^3.9.7",
+    "typescript": "^4",
     "webpack": "^5.10.2",
     "webpack-cli": "^4.2.0",
-    "webpack-dev-server": "^3.11.0"
-  },
-  "scripts": {
-    "dev": "webpack -c webpack.dev.conf.ts",
-    "watch": "webpack -c webpack.dev.conf.ts --watch",
-    "prod": "webpack -c webpack.conf.ts",
-    "pretty": "prettier -w frontend"
+    "webpack-merge": "^5.8.0"
   }
 }

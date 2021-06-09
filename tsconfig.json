@@ -4,6 +4,7 @@
     "esModuleInterop": true,
     "jsx": "react",
     "allowJs": true,
-    "lib": ["ES5", "ES6", "DOM"]
+    "lib": ["es6", "es2015", "esnext", "dom"],
+    "target": "es6"
   }
 }
