@@ -1,4 +1,5 @@
-FROM composer as builder
+FROM php:7.4-fpm-alpine as builder
+COPY --from=composer/composer /usr/bin/composer /usr/bin/composer
 WORKDIR /app
 COPY ./composer.json ./composer.lock /app/
 RUN composer install

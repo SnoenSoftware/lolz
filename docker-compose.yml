@@ -11,7 +11,7 @@ services:
   nginx:
     image: 'registry.digitalocean.com/brbcoffee/site:lolz-proxy'
     ports:
-      - 80:80
+      - 8000:80
 
   cron:
     image: 'registry.digitalocean.com/brbcoffee/site:lolz-cron'
