@@ -5,7 +5,6 @@
   "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "webpack -c frontend/js/webpack.dev.conf.ts",
-    "watch": "webpack -c frontend/js/webpack.dev.conf.ts --watch",
     "prod": "webpack -c frontend/js/webpack.prod.conf.ts",
     "pretty": "prettier -w frontend"
   },
@@ -33,20 +32,27 @@
     "@babel/preset-env": "^7.12.10",
     "@babel/preset-react": "^7.12.10",
     "@babel/preset-typescript": "^7.13.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@types/mini-css-extract-plugin": "^1.4.3",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/webpack-merge": "^5.0.0",
+    "@types/webpack-plugin-serve": "^1.4.0",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.0.1",
     "mini-css-extract-plugin": "^1.6",
     "prettier": "^2.2.1",
+    "react-refresh": "^0.10.0",
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
+    "styled-components": "^5.3.0",
     "ts-node": "^9.1.1",
+    "type-fest": "^1.2.0",
     "typescript": "^4",
     "webpack": "^5.10.2",
     "webpack-cli": "^4.2.0",
-    "webpack-merge": "^5.8.0"
+    "webpack-merge": "^5.8.0",
+    "webpack-plugin-serve": "^1.4.1"
   }
 }
