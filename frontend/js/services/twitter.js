@@ -1,8 +1,8 @@
 const renderTweets = () => {
-    let oembedUrl = "/api/twitter";
-    let tweets = document.querySelectorAll("tweet");
+    const oembedUrl = "/api/twitter";
+    const tweets = document.querySelectorAll("tweet");
     Array.from(tweets).forEach(function (elem) {
-        let tweetUrl = elem.dataset.url;
+        const tweetUrl = elem.dataset.url;
         fetch(oembedUrl + "?url=" + tweetUrl, {
             method: "GET",
             mode: "cors",
@@ -12,11 +12,11 @@ const renderTweets = () => {
         })
             .then((data) => data.json())
             .then((data) => {
-                let newNode = document.createElement("div");
+                const newNode = document.createElement("div");
                 newNode.innerHTML = data.html;
                 newNode.querySelector("script").remove();
                 elem.replaceWith(newNode);
-                twttr.widgets.load();
+                window.twttr.widgets.load();
             });
     });
 };

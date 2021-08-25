@@ -4,14 +4,16 @@
   "repository": "https://www.github.com/bjornsnoen/lolz",
   "license": "GPL-3.0-or-later",
   "scripts": {
-    "dev": "webpack -c frontend/js/webpack.dev.conf.ts",
-    "prod": "webpack -c frontend/js/webpack.prod.conf.ts",
+    "dev": "TS_NODE_PROJECT=frontend/tsconfig.json webpack -c frontend/webpack/dev.conf.ts",
+    "prod": "TS_NODE_PROJECT=frontend/tsconfig.json webpack -c frontend/webpack/prod.conf.ts",
     "pretty": "prettier -w frontend"
   },
   "babel": {
     "presets": [
       "@babel/preset-env",
-      "@babel/preset-react",
+      ["@babel/preset-react", {
+        "runtime": "automatic"
+      }],
       "@babel/preset-typescript"
     ],
     "plugins": [
@@ -21,36 +23,41 @@
     ]
   },
   "dependencies": {
+    "constate": "^3.3.0",
     "idb": "^5.0.8",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "remove-files-webpack-plugin": "^1.4.4"
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
+    "@babel/core": "^7.15.0",
     "@babel/plugin-transform-runtime": "^7.14.3",
     "@babel/preset-env": "^7.12.10",
-    "@babel/preset-react": "^7.12.10",
+    "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.13.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@types/mini-css-extract-plugin": "^1.4.3",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/styled-components": "^5.1.12",
     "@types/webpack-merge": "^5.0.0",
     "@types/webpack-plugin-serve": "^1.4.0",
+    "@typescript-eslint/eslint-plugin": "^4.29.3",
+    "@typescript-eslint/parser": "^4.29.3",
     "babel-loader": "^8.2.2",
-    "css-loader": "^5.0.1",
-    "mini-css-extract-plugin": "^1.6",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-react": "^7.24.0",
     "prettier": "^2.2.1",
     "react-refresh": "^0.10.0",
-    "sass": "^1.30.0",
-    "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
-    "styled-components": "^5.3.0",
+    "styled-components": "^5.3.1",
     "ts-node": "^9.1.1",
     "type-fest": "^1.2.0",
     "typescript": "^4",
-    "webpack": "^5.10.2",
+    "webpack": "^5.51.1",
     "webpack-cli": "^4.2.0",
     "webpack-merge": "^5.8.0",
     "webpack-plugin-serve": "^1.4.1"

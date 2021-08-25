@@ -1,5 +1,5 @@
 const renderReddits = () => {
-    let scriptNode = document.createElement("script");
+    const scriptNode = document.createElement("script");
     Array.from(
         document.querySelectorAll('script[name="redditscript"]')
     ).forEach((elem) => {

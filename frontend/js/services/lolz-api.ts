@@ -27,13 +27,13 @@ const onlyUnseen = async (toBeFiltered: IServerLol[]) => {
 
 let page = 0;
 
-const getMoreLolz = async () => {
+const getMoreLolz = async (): Promise<IServerLol[]> => {
     const response = await fetch(`/api/more/page/${page}`);
     const data: IServerLol[] = await response.json();
 
     page++;
     const unseen = await onlyUnseen(data);
-    if (unseen.length >= 5) {
+    if (unseen.length >= 5 || data.length === 0) {
         return unseen;
     } else {
         return unseen.concat(await getMoreLolz());

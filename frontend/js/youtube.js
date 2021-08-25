@@ -1,10 +1,11 @@
 (function () {
     window.onYouTubePlayerAPIReady = function () {
-        let videos = document.querySelectorAll("youtube");
+        const videos = document.querySelectorAll("youtube");
         Array.from(videos).forEach(function (elem) {
-            let videoId = elem.dataset.viewId;
+            const videoId = elem.dataset.viewId;
             elem.setAttribute("id", videoId);
-            let player = new YT.Player(videoId, {
+            // eslint-disable-next-line
+            const player = new window.YT.Player(videoId, {
                 height: 360,
                 width: 640,
                 videoId: videoId,
