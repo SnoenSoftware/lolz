@@ -2,19 +2,19 @@ version: "3"
 
 services:
   php:
-    image: "registry.digitalocean.com/brbcoffee/site:lolz-fpm"
+    image: "ghcr.io/bjornsnoen/lolz/fpm:latest"
     volumes:
       - './data:/var/www/lolz/data'
     environment:
       APP_ENV: "prod"
 
   nginx:
-    image: 'registry.digitalocean.com/brbcoffee/site:lolz-proxy'
+    image: 'ghcr.io/bjornsnoen/lolz/proxy:latest'
     ports:
       - 8000:80
 
   cron:
-    image: 'registry.digitalocean.com/brbcoffee/site:lolz-cron'
+    image: 'ghcr.io/bjornsnoen/lolz/cron:latest'
     volumes:
       - './data:/app/data'
     environment:
