@@ -1,11 +1,11 @@
-import React from "react";
+import { FC } from "react";
 import {
     SupportedThemes,
     useCurrentThemeContext,
 } from "../contexts/CurrentThemeContext";
 import { TogglePill } from "./TogglePill";
 
-export const ThemeToggle: React.FC = () => {
+export const ThemeToggle: FC = () => {
     const { currentTheme, setCurrentTheme } = useCurrentThemeContext();
 
     return (

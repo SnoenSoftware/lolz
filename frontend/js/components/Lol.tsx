@@ -1,4 +1,5 @@
-import React, { useRef, useState, useEffect, MutableRefObject } from "react";
+import { useRef, useState, useEffect, MutableRefObject } from "react";
+import { FC } from "react";
 import { IServerLol } from "../services/lolz-api";
 import styled from "styled-components";
 
@@ -47,7 +48,7 @@ const LolHeader = styled.h2`
     cursor: pointer;
 `;
 
-const Lol: React.FC<LolProps> = ({ lolData, unloadCallback }) => {
+const Lol: FC<LolProps> = ({ lolData, unloadCallback }) => {
     const { url, title, content } = lolData;
     const refBox = useRef();
     const [hasBeenOnScreen, setHasBeenOnScreen] = useState(false);

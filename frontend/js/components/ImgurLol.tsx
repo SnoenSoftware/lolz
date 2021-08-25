@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import styled from "styled-components";
 import { IImgurAlbumResponse, IImgurImageResponse } from "../services/imgur";
 
@@ -10,11 +10,11 @@ const ImgurAlbumWrapper = styled.div`
     }
 `;
 
-export const ImgurLol: React.FC<IImgurImageResponse> = ({ link }) => {
+export const ImgurLol: FC<IImgurImageResponse> = ({ link }) => {
     return <img src={link} alt={"Some imgur funny"} />;
 };
 
-export const ImgurAlbum: React.FC<IImgurAlbumResponse> = ({ images }) => {
+export const ImgurAlbum: FC<IImgurAlbumResponse> = ({ images }) => {
     return (
         <ImgurAlbumWrapper>
             {images.map((image) => (

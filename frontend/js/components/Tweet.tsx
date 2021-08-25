@@ -1,3 +1,3 @@
-import React from "react";
+import { FC } from "react";
 
-const Tweet: React.FC<{}>;
+const Tweet: FC<{}> = () => null;

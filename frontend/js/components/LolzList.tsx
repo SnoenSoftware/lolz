@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import getMoreLolz, { IServerLol } from "../services/lolz-api";
 import Lol from "./Lol";
 import renderReddits from "../services/reddit";

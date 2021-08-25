@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { FC } from "react";
 import styled from "styled-components";
 
 const SliderContainer = styled.label`
@@ -54,7 +55,7 @@ const Slider = styled.span`
     }
 `;
 
-export const TogglePill: React.FC<{
+export const TogglePill: FC<{
     initialState: boolean;
     toggleFunc: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }> = ({ initialState = false, toggleFunc }) => {
