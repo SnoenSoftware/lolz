@@ -6,23 +6,18 @@
   "scripts": {
     "dev": "TS_NODE_PROJECT=frontend/tsconfig.json webpack -c frontend/webpack/dev.conf.ts",
     "prod": "TS_NODE_PROJECT=frontend/tsconfig.json webpack -c frontend/webpack/prod.conf.ts",
-    "pretty": "prettier -w frontend"
+    "pretty": "prettier -w frontend",
+    "prepare": "husky install"
   },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      [
-        "@babel/preset-react",
-        {
-          "runtime": "automatic"
-        }
-      ],
-      "@babel/preset-typescript"
-    ],
-    "plugins": [
-      [
-        "@babel/plugin-transform-runtime"
-      ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,css}": [
+      "prettier --write",
+      "eslint --fix src/ --max-warnings=0"
     ]
   },
   "dependencies": {
@@ -53,6 +48,8 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-react": "^7.24.0",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
     "prettier": "^2.2.1",
     "react-refresh": "^0.10.0",
     "style-loader": "^2.0.0",
