@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { FC } from "react";
-import styled from "styled-components";
+import { useState } from 'react';
+import { FC } from 'react';
+import styled from 'styled-components';
 
 const SliderContainer = styled.label`
     position: absolute;
@@ -43,7 +43,7 @@ const Slider = styled.span`
 
     :before {
         position: absolute;
-        content: "";
+        content: '';
         height: 26px;
         width: 26px;
         left: 4px;

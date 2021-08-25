@@ -1,4 +1,4 @@
-import { seen } from "./viewedDb";
+import { seen } from './viewedDb';
 
 interface IServerDate {
     date: string;

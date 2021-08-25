@@ -1,7 +1,7 @@
-import { useRef, useState, useEffect, MutableRefObject } from "react";
-import { FC } from "react";
-import { IServerLol } from "../services/lolz-api";
-import styled from "styled-components";
+import { useRef, useState, useEffect, MutableRefObject } from 'react';
+import { FC } from 'react';
+import { IServerLol } from '../services/lolz-api';
+import styled from 'styled-components';
 
 interface LolProps {
     lolData: IServerLol;
@@ -28,7 +28,7 @@ const LolContainer = styled.div`
     }
     &:after {
         position: relative;
-        content: "";
+        content: '';
         height: 2px;
         background-image: linear-gradient(
             to right,
@@ -72,7 +72,7 @@ const Lol: FC<LolProps> = ({ lolData, unloadCallback }) => {
     };
 
     const clickHandler = () => {
-        window.open(url, "_blank");
+        window.open(url, '_blank');
     };
 
     const isOnScreen = useOnScreen(refBox);

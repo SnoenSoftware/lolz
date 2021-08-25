@@ -1,5 +1,5 @@
-import { render } from "react-dom";
-import { ImgurAlbum, ImgurLol } from "../components/ImgurLol";
+import { render } from 'react-dom';
+import { ImgurAlbum, ImgurLol } from '../components/ImgurLol';
 
 export interface IImgurImageResponse {
     link: string;
@@ -16,12 +16,12 @@ const isImgurImage = (a: any): a is IImgurImageResponse => a && !a.images;
 const isImgurAlbum = (a: any): a is IImgurAlbumResponse => a && a.images;
 
 const fetchImgurData = async (imgurUrl: string): Promise<ImgurResponse> => {
-    let apiUrl = "/api/imgur";
-    return fetch(apiUrl + "?url=" + imgurUrl, {
-        method: "GET",
-        mode: "no-cors",
+    let apiUrl = '/api/imgur';
+    return fetch(apiUrl + '?url=' + imgurUrl, {
+        method: 'GET',
+        mode: 'no-cors',
         headers: {
-            Accept: "application/json",
+            Accept: 'application/json',
         },
     })
         .then((data) => data.json())
@@ -29,9 +29,9 @@ const fetchImgurData = async (imgurUrl: string): Promise<ImgurResponse> => {
 };
 
 export const loadImgur = async () => {
-    let imgurs = document.querySelectorAll<HTMLElement>("imgur");
+    let imgurs = document.querySelectorAll<HTMLElement>('imgur');
     Array.from(imgurs)
-        .filter((elem) => elem.dataset.visited !== "true")
+        .filter((elem) => elem.dataset.visited !== 'true')
         .forEach(async (elem) => {
             let imgurUrl = elem.dataset.url;
             const data = await fetchImgurData(imgurUrl);
@@ -41,7 +41,7 @@ export const loadImgur = async () => {
             } else if (isImgurAlbum(data)) {
                 render(<ImgurAlbum {...data} />, elem);
             }
-            elem.dataset.visited = "true";
+            elem.dataset.visited = 'true';
         });
 };
 

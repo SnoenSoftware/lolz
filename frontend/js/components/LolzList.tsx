@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
-import getMoreLolz, { IServerLol } from "../services/lolz-api";
-import Lol from "./Lol";
-import renderReddits from "../services/reddit";
-import loadImgur from "../services/imgur";
-import renderTweets from "../services/twitter";
-import { saveLolAsViewed, seen } from "../services/viewedDb";
-import styled from "styled-components";
-import { ThemeToggle } from "./ThemeToggle";
+import { useEffect, useState } from 'react';
+import getMoreLolz, { IServerLol } from '../services/lolz-api';
+import Lol from './Lol';
+import renderReddits from '../services/reddit';
+import loadImgur from '../services/imgur';
+import renderTweets from '../services/twitter';
+import { saveLolAsViewed, seen } from '../services/viewedDb';
+import styled from 'styled-components';
+import { ThemeToggle } from './ThemeToggle';
 import {
     SupportedThemes,
     useCurrentThemeContext,
-} from "../contexts/CurrentThemeContext";
+} from '../contexts/CurrentThemeContext';
 
 const LolzWrapper = styled.div`
     display: flex;

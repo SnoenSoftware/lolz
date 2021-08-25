@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import { SupportedThemes } from "../contexts/CurrentThemeContext";
+import { createGlobalStyle } from 'styled-components';
+import { SupportedThemes } from '../contexts/CurrentThemeContext';
 
 export const GlobalStyle = createGlobalStyle<{ currentTheme: SupportedThemes }>`
     #app {
@@ -8,8 +8,8 @@ export const GlobalStyle = createGlobalStyle<{ currentTheme: SupportedThemes }>`
     
     body {
         background-color: ${(props) =>
-            props.currentTheme == SupportedThemes.dark ? "#121212" : "white"};
+            props.currentTheme == SupportedThemes.dark ? '#121212' : 'white'};
         color: ${(props) =>
-            props.currentTheme == SupportedThemes.dark ? "#ddd" : "black"};
+            props.currentTheme == SupportedThemes.dark ? '#ddd' : 'black'};
     }
 `;
