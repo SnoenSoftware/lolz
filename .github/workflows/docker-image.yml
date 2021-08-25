@@ -1,0 +1,19 @@
+name: "docker-push"
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+      - name: build
+        run: make prod
+      - name: push
+        run: make push
+    
+    
