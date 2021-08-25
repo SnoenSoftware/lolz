@@ -23,10 +23,10 @@ CMD [ "crond", "-f" ]
 
 FROM node as frontend-builder
 WORKDIR /app
-COPY ./package.json ./package-lock.json /app/
-RUN npm i
+COPY ./package.json ./yarn.lock /app/
+RUN yarn
 COPY ./ /app
-RUN npm run prod
+RUN yarn prod
 
 
 FROM nginx:alpine as proxy
