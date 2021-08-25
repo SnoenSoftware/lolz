@@ -2,17 +2,17 @@
 
 .PHONY: prod push down run
 
-registry = registry.digitalocean.com
+registry := ghcr.io/bjornsnoen/brbcoffee
 
 prod:
-	docker build . -f dockerfiles/Dockerfile --target=fpm -t $(registry)/brbcoffee/site:lolz-fpm
-	docker build . -f dockerfiles/Dockerfile --target=cron -t $(registry)/brbcoffee/site:lolz-cron
-	docker build . -f dockerfiles/Dockerfile --target=proxy -t $(registry)/brbcoffee/site:lolz-proxy
+	docker build . -f dockerfiles/Dockerfile --target=fpm -t $(registry)/lolz-fpm:latest
+	docker build . -f dockerfiles/Dockerfile --target=cron -t $(registry)/lolz-cron:latest
+	docker build . -f dockerfiles/Dockerfile --target=proxy -t $(registry)/lolz-proxy:latest
 
 push: prod
-	docker push $(registry)/brbcoffee/site:lolz-fpm
-	docker push $(registry)/brbcoffee/site:lolz-cron
-	docker push $(registry)/brbcoffee/site:lolz-proxy
+	docker push $(registry)/lolz-fpm:latest
+	docker push $(registry)/lolz-cron:latest
+	docker push $(registry)/lolz-proxy:latest
 
 run: prod
 	docker-compose up -d
