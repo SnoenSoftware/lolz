@@ -28,6 +28,10 @@ const LolzList = () => {
         }
     };
 
+    window.document.onkeydown = ({key}) => {
+        key == "j" && unloader(lolz[0].url);
+    };
+
     useEffect(() => {
         getMoreLolz()
             .then((unseenLolz) => {
