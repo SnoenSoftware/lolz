@@ -6,11 +6,6 @@ import loadImgur from '../services/imgur';
 import renderTweets from '../services/twitter';
 import { saveLolAsViewed, seen } from '../services/viewedDb';
 import styled from 'styled-components';
-import { ThemeToggle } from './ThemeToggle';
-import {
-    SupportedThemes,
-    useCurrentThemeContext,
-} from '../contexts/CurrentThemeContext';
 
 const LolzWrapper = styled.div`
     display: flex;
@@ -24,7 +19,6 @@ const LolzList = () => {
     const [lolz, setLolz] = useState<IServerLol[]>([]);
     const [initialLoadDone, setInitialLoadDone] = useState(false);
     const [feedEmpty, setFeedEmpty] = useState(false);
-    const { currentTheme } = useCurrentThemeContext();
 
     const unloader = async (url: string) => {
         const lol = lolz.find((data: IServerLol) => data.url == url);

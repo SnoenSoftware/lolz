@@ -1,6 +1,6 @@
-.DEFAULT_GOAL := run
+.DEFAULT_GOAL := localdev
 
-.PHONY: prod push down run
+.PHONY: prod push down run localdev
 
 registry := ghcr.io/bjornsnoen/lolz
 
@@ -22,3 +22,17 @@ down:
 
 clean: down
 	rm -rf data/db.sqlite node_modules vendor
+
+vendor:
+	docker run --rm -it -v $$(pwd):$$(pwd) -w $$(pwd) composer/composer composer install
+
+node_modules:
+	docker run --rm -it -v $$(pwd):$$(pwd) -w $$(pwd) node yarn
+
+
+localdev:
+	bash -c "trap 'trap - SIGINT SIGTERM ERR; docker-compose down; exit 1' SIGINT SIGTERM ERR; $(MAKE) localdev-internal"
+
+localdev-internal: vendor node_modules
+	docker-compose up -d cron
+	yarn local-dev

@@ -3,7 +3,7 @@ import { FC } from 'react';
 import styled from 'styled-components';
 
 const SliderContainer = styled.label`
-    position: absolute;
+    position: fixed;
     top: 1em;
     right: 1em;
     display: inline-block;
