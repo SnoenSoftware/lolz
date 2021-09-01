@@ -12,4 +12,8 @@ export const GlobalStyle = createGlobalStyle<{ currentTheme: SupportedThemes }>`
         color: ${(props) =>
             props.currentTheme == SupportedThemes.dark ? '#ddd' : 'black'};
     }
+
+    .embedly-card iframe {
+        background-color: white;
+    }
 `;
