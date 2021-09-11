@@ -2,17 +2,19 @@
 
 .PHONY: prod push down run localdev
 
-registry := ghcr.io/bjornsnoen/lolz
+registry := ghcr.io/brbkaffe
+repository := lolz
+image := $(registry)/$(repository)
 
 prod:
-	docker build . -f dockerfiles/Dockerfile --target=fpm -t $(registry)/fpm:latest
-	docker build . -f dockerfiles/Dockerfile --target=cron -t $(registry)/cron:latest
-	docker build . -f dockerfiles/Dockerfile --target=proxy -t $(registry)/proxy:latest
+	docker build . -f dockerfiles/Dockerfile --target=fpm -t $(image):fpm
+	docker build . -f dockerfiles/Dockerfile --target=cron -t $(image):cron
+	docker build . -f dockerfiles/Dockerfile --target=proxy -t $(image):proxy
 
 push: prod
-	docker push $(registry)/fpm:latest
-	docker push $(registry)/cron:latest
-	docker push $(registry)/proxy:latest
+	docker push $(image):fpm
+	docker push $(image):cron
+	docker push $(image):proxy
 
 run: prod
 	docker-compose up -d
