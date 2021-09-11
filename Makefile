@@ -35,4 +35,4 @@ localdev:
 
 localdev-internal: vendor node_modules
 	docker-compose up -d cron
-	yarn local-dev
+	npx yarn local-dev

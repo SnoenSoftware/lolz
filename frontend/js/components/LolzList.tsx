@@ -29,7 +29,7 @@ const LolzList = () => {
     };
 
     window.document.onkeydown = ({key}) => {
-        key == "j" && unloader(lolz[0].url);
+        key == "j" && unloader(lolz[0].url).then(() => window.scrollTo(0, 0));
     };
 
     useEffect(() => {
