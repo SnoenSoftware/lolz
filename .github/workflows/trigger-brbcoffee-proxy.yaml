@@ -12,29 +12,11 @@ jobs:
   prod-proxy:
     name: Update prod proxy image
     runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Log in to the Container registry
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+      - name: Trigger workflow
+        uses: peter-evans/repository-dispatch@v1
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Add python 3.9
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'
-
-      - name: Install pipenv
-        run: python3 -m pip install pipenv
-
-      - name: Make and push the docker image
-        env:
-          FREEDNS_USERNAME: ${{ secrets.FREEDNS_USERNAME }}
-          FREEDNS_PASSWORD: ${{ secrets.FREEDNS_PASSWORD }}
-        run: make prod-proxy
+          token: ${{ secrets.WORKFLOW_TRIGGER_TOKEN }}
+          repository: brbkaffe/brbcoffeespace
+          event-type: lolz-update
