@@ -28,7 +28,7 @@ WORKDIR /app
 COPY ./package.json ./yarn.lock /app/
 RUN yarn
 COPY ./ /app
-RUN yarn prod
+RUN NODE_OPTIONS=--openssl-legacy-provider yarn prod
 
 
 FROM nginx:alpine as proxy

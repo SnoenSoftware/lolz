@@ -1,20 +1,20 @@
 version: "3"
 
 services:
-  php:
-    image: "ghcr.io/brbkaffe/lolz/fpm:latest"
+  lolz-fpm:
+    image: "ghcr.io/brbkaffe/lolz:fpm"
     volumes:
       - './data:/var/www/lolz/data'
     environment:
       APP_ENV: "prod"
 
   nginx:
-    image: 'ghcr.io/brbkaffe/lolz/proxy:latest'
+    image: 'ghcr.io/brbkaffe/lolz:proxy'
     ports:
-      - 8000:80
+      - "8000:80"
 
   cron:
-    image: 'ghcr.io/brbkaffe/lolz/cron:latest'
+    image: 'ghcr.io/brbkaffe/lolz:cron'
     volumes:
       - './data:/app/data'
     environment:
