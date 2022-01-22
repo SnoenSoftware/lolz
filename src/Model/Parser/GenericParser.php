@@ -2,33 +2,24 @@
 /**
  * @license Proprietary
  * @author Bjørn Snoen <bjorn.snoen@gmail.com>
- * @copyright BRBcoffee 2020
+ * @copyright BRBcoffee 2022
  */
 
 namespace App\Model\Parser;
 
-
 use App\Entity\Lol;
 use App\Model\Api\ParserAbstract;
+use Laminas\Feed\Reader\Feed\FeedInterface;
+use Laminas\Feed\Reader\Reader;
 use PHPHtmlParser\Dom;
 use PHPHtmlParser\Exceptions\ChildNotFoundException;
-use PHPHtmlParser\Exceptions\CircularException;
-use PHPHtmlParser\Exceptions\NotLoadedException;
-use PHPHtmlParser\Exceptions\StrictException;
-use Zend\Feed\Reader\Entry\EntryInterface;
-use Zend\Feed\Reader\Feed\FeedInterface;
-use Zend\Feed\Reader\Reader;
 
-/**
- * Class GenericParser
- * @author Bjørn Snoen <bjorn.snoen@gmail.com>
- */
 class GenericParser extends ParserAbstract
 {
-    /**
-     * @var FeedInterface
-     */
-    protected $feed;
+    protected FeedInterface $feed;
+
+    /** @var Lol[] */
+    protected array $fetchedThisRun = [];
 
     /**
      * @return Lol|null
@@ -41,9 +32,9 @@ class GenericParser extends ParserAbstract
         /** @var EntryInterface $next */
         try {
             $next = $feed->current();
-        } catch (\ErrorException $exception) {
+        } catch (\ErrorException $e) {
             return null;
-        } catch (\TypeError $exception) {
+        } catch (\TypeError $e) {
             return null;
         }
         $feed->next();
@@ -66,14 +57,17 @@ class GenericParser extends ParserAbstract
         }
 
         $lol->setFetched($this->getNow())->setUrl($next->getLink())->setTitle($next->getTitle());
+
+        foreach ($this->fetchedThisRun as $alreadyUsedLol) {
+            if ($alreadyUsedLol->getUrl() == $lol->getUrl() || $alreadyUsedLol->getImageUrl() == $lol->getImageUrl()) {
+                return $this->next();
+            }
+        }
+
+        $this->fetchedThisRun[] = $lol;
         return $lol;
     }
 
-    /**
-     * @param Dom $dom
-     * @return array
-     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
-     */
     private function getVideoSources(Dom $dom): array
     {
         try {
@@ -123,11 +117,6 @@ class GenericParser extends ParserAbstract
         return $title ? $title['value'] : '';
     }
 
-    /**
-     * @param Dom $dom
-     * @return Dom\HtmlNode|null
-     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
-     */
     private function getImage(Dom $dom): ?Dom\HtmlNode
     {
         try {
@@ -143,11 +132,7 @@ class GenericParser extends ParserAbstract
         return $img;
     }
 
-    /**
-     * @return FeedInterface
-     * @author Bjørn Snoen <bjorn.snoen@gmail.com>
-     */
-    protected function getFeed()
+    protected function getFeed(): FeedInterface
     {
         if (isset($this->feed)) {
             return $this->feed;

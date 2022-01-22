@@ -35,6 +35,6 @@ node_modules:
 localdev:
 	bash -c "trap 'trap - SIGINT SIGTERM ERR; docker-compose down; exit 1' SIGINT SIGTERM ERR; $(MAKE) localdev-internal"
 
-localdev-internal: vendor node_modules
+localdev-internal: vendor node_modules prod
 	docker-compose up -d cron
 	npx yarn local-dev

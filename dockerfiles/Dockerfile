@@ -1,17 +1,18 @@
-FROM php:7.4-fpm-alpine as builder
+FROM php:8.0-fpm-alpine as builder
 COPY --from=composer/composer /usr/bin/composer /usr/bin/composer
 WORKDIR /app
 COPY ./composer.json ./composer.lock /app/
+COPY ./config /app/config
 RUN composer install
 COPY ./ /app/
 
 
-FROM php:7.4-fpm-alpine as fpm
+FROM php:8.0-fpm-alpine as fpm
 LABEL org.opencontainers.image.source = "https://github.com/brbkaffe/lolz"
 COPY --from=builder /app/ /var/www/lolz/
 
 
-FROM php:7.4-cli-alpine as cron
+FROM php:8.0-cli-alpine as cron
 LABEL org.opencontainers.image.source = "https://github.com/brbkaffe/lolz"
 COPY ./dockerfiles/cron/app.crontab /etc/cron.d/app.crontab
 COPY ./dockerfiles/cron/entrypoint.sh /entrypoint.sh
@@ -28,7 +29,7 @@ WORKDIR /app
 COPY ./package.json ./yarn.lock /app/
 RUN yarn
 COPY ./ /app
-RUN NODE_OPTIONS=--openssl-legacy-provider yarn prod
+RUN yarn prod
 
 
 FROM nginx:alpine as proxy

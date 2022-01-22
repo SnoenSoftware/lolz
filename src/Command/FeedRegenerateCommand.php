@@ -23,18 +23,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class FeedRegenerateCommand extends Command
 {
     protected static $defaultName = 'feed:regenerate';
-    /**
-     * @var ParserRepository
-     */
-    private $parserRepository;
-    /**
-     * @var FeedRepository
-     */
-    private $feedRepository;
-    /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
 
     /**
      * @var Client
@@ -45,22 +33,14 @@ class FeedRegenerateCommand extends Command
      * @var PromiseInterface[]
      */
     private $promises;
-    /**
-     * @var LolRepository
-     */
-    private $lolRepository;
 
     public function __construct(
-        ParserRepository $parserRepository,
-        FeedRepository $feedRepository,
-        EntityManagerInterface $entityManager,
-        LolRepository $lolRepository
+        private ParserRepository $parserRepository,
+        private FeedRepository $feedRepository,
+        private EntityManagerInterface $entityManager,
+        private LolRepository $lolRepository
     ) {
         parent::__construct(self::$defaultName);
-        $this->parserRepository = $parserRepository;
-        $this->feedRepository = $feedRepository;
-        $this->entityManager = $entityManager;
-        $this->lolRepository = $lolRepository;
     }
 
     protected function configure()
