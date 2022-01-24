@@ -7,9 +7,9 @@ repository := lolz
 image := $(registry)/$(repository)
 
 prod:
-	docker build . -f dockerfiles/Dockerfile --target=fpm -t $(image):fpm
-	docker build . -f dockerfiles/Dockerfile --target=cron -t $(image):cron
-	docker build . -f dockerfiles/Dockerfile --target=proxy -t $(image):proxy
+	docker build . -f dockerfiles/Dockerfile --target=fpm -t $(image):fpm ${DOCKER_BUILD_FLAGS}
+	docker build . -f dockerfiles/Dockerfile --target=cron -t $(image):cron ${DOCKER_BUILD_FLAGS}
+	docker build . -f dockerfiles/Dockerfile --target=proxy -t $(image):proxy ${DOCKER_BUILD_FLAGS}
 
 push: prod
 	docker push $(image):fpm
