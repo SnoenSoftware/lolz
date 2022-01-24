@@ -24,7 +24,7 @@ ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "crond", "-f" ]
 
 
-FROM node as frontend-builder
+FROM node:lts-alpine as frontend-builder
 WORKDIR /app
 COPY ./package.json ./yarn.lock /app/
 RUN yarn
