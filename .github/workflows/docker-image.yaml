@@ -24,7 +24,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: push
-        run: make push
+      - name: build and push
+        run: make prod
         env:
-          DOCKER_BUILD_FLAGS: "--cache-to=type=gha,mode=max --cache-from=type=gha"
+          DOCKER_BUILD_FLAGS: "--cache-to=type=gha,mode=max --cache-from=type=gha --push"
