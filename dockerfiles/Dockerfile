@@ -1,8 +1,10 @@
 FROM php:8.0-fpm-alpine as builder
-COPY --from=composer/composer /usr/bin/composer /usr/bin/composer
+COPY --from=composer/composer:1 /usr/bin/composer /usr/bin/composer
 WORKDIR /app
-COPY ./composer.json ./composer.lock /app/
+COPY ./composer.json ./composer.lock ./.env /app/
 COPY ./config /app/config
+COPY ./bin /app/bin
+COPY ./src /app/src
 RUN composer install
 COPY ./ /app/
 
@@ -27,13 +29,14 @@ CMD [ "crond", "-f" ]
 FROM node:lts-alpine as frontend-builder
 WORKDIR /app
 COPY ./package.json ./yarn.lock /app/
-RUN yarn
+RUN corepack enable && yarn
 COPY ./ /app
+RUN yarn
 RUN yarn prod
 
 
 FROM nginx:alpine as proxy
 LABEL org.opencontainers.image.source = "https://github.com/brbkaffe/lolz"
-COPY ./nginx.conf /etc/nginx/conf.d/lolz.conf
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY ./public /var/www/lolz/public
 COPY --from=frontend-builder /app/public/build /var/www/lolz/public/build

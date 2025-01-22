@@ -11,6 +11,7 @@
     "php-server": "php -S localhost:8000 -t public",
     "local-dev": "concurrently npm:dev npm:php-server"
   },
+  "packageManager": "yarn@4.6.0",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -60,7 +61,7 @@
     "ts-node": "^9.1.1",
     "type-fest": "^1.2.0",
     "typescript": "^4",
-    "webpack": "^5.51.1",
+    "webpack": "^5.97.1",
     "webpack-cli": "^4.2.0",
     "webpack-merge": "^5.8.0",
     "webpack-plugin-serve": "^1.4.1"

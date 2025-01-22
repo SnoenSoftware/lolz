@@ -7,3 +7,4 @@ data/
 Makefile
 .git/
 docker-compose.yml
+.yarn/
