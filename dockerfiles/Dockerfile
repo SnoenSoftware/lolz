@@ -10,12 +10,12 @@ COPY ./ /app/
 
 
 FROM php:8.0-fpm-alpine as fpm
-LABEL org.opencontainers.image.source = "https://github.com/brbkaffe/lolz"
+LABEL org.opencontainers.image.source = "https://github.com/SnoenSoftware/lolz"
 COPY --from=builder /app/ /var/www/lolz/
 
 
 FROM php:8.0-cli-alpine as cron
-LABEL org.opencontainers.image.source = "https://github.com/brbkaffe/lolz"
+LABEL org.opencontainers.image.source = "https://github.com/SnoenSoftware/lolz"
 COPY ./dockerfiles/cron/app.crontab /etc/cron.d/app.crontab
 COPY ./dockerfiles/cron/entrypoint.sh /entrypoint.sh
 COPY --from=builder /app /app/
@@ -36,7 +36,7 @@ RUN yarn prod
 
 
 FROM nginx:alpine as proxy
-LABEL org.opencontainers.image.source = "https://github.com/brbkaffe/lolz"
+LABEL org.opencontainers.image.source = "https://github.com/SnoenSoftware/lolz"
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY ./public /var/www/lolz/public
 COPY --from=frontend-builder /app/public/build /var/www/lolz/public/build

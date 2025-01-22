@@ -2,20 +2,20 @@ version: "3"
 
 services:
   lolz-fpm:
-    image: "ghcr.io/brbkaffe/lolz:fpm"
+    image: "ghcr.io/snoensoftware/lolz:fpm"
     volumes:
-      - './data:/var/www/lolz/data'
+      - "./data:/var/www/lolz/data"
     environment:
       APP_ENV: "prod"
 
   nginx:
-    image: 'ghcr.io/brbkaffe/lolz:proxy'
+    image: "ghcr.io/snoensoftware/lolz:proxy"
     ports:
       - "8000:80"
 
   cron:
-    image: 'ghcr.io/brbkaffe/lolz:cron'
+    image: "ghcr.io/snoensoftware/lolz:cron"
     volumes:
-      - './data:/app/data'
+      - "./data:/app/data"
     environment:
       APP_ENV: "prod"

@@ -2,7 +2,7 @@
 
 .PHONY: prod push down run localdev
 
-registry := ghcr.io/brbkaffe
+registry := ghcr.io/snoensoftware
 repository := lolz
 image := $(registry)/$(repository)
 
