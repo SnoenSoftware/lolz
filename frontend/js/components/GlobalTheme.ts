@@ -7,10 +7,12 @@ export const GlobalStyle = createGlobalStyle<{ currentTheme: SupportedThemes }>`
     }
     
     body {
-        background-color: ${(props) =>
-            props.currentTheme == SupportedThemes.dark ? '#121212' : 'white'};
-        color: ${(props) =>
-            props.currentTheme == SupportedThemes.dark ? '#ddd' : 'black'};
+        background-color: white;
+        color: black;
+        @media (prefers-color-scheme: dark) {
+            background-color: #121212;
+            color: #ddd;
+        }
     }
 
     .embedly-card iframe {
