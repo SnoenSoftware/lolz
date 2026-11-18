@@ -29,14 +29,11 @@ class GenericParser extends ParserAbstract
     public function next(): ?Lol
     {
         $feed = $this->getFeed();
-        /** @var EntryInterface $next */
-        try {
-            $next = $feed->current();
-        } catch (\ErrorException $e) {
-            return null;
-        } catch (\TypeError $e) {
+        if (!$feed->valid()) {
             return null;
         }
+        /** @var EntryInterface $next */
+        $next = $feed->current();
         $feed->next();
 
         $content = $next->getContent();

@@ -39,6 +39,9 @@ class XkcdParser extends ParserAbstract
     public function next(): ?Lol
     {
         $body = $this->getResponseBody();
+        if (!isset($body->entry[$this->pointer])) {
+            return null;
+        }
         $this->pointingAt = $body->entry[$this->pointer++];
 
         $lol = new Lol();
@@ -50,11 +53,7 @@ class XkcdParser extends ParserAbstract
                 ->setTitle($this->getTitle())
                 ->setUrl($this->getUrl());
         } catch (\Exception $e) {
-            if ($this->pointingAt == null) {
-                return null;
-            } else {
-                return $this->next();
-            }
+            return $this->next();
         }
         return $lol;
     }

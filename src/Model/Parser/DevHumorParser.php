@@ -54,22 +54,22 @@ class DevHumorParser extends ParserAbstract
     }
 
     /**
-     * @return \SimpleXMLElement
+     * @return \SimpleXMLElement|null
      * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
-    protected function getCurrentItem(): \SimpleXMLElement
+    protected function getCurrentItem(): ?\SimpleXMLElement
     {
         return $this->getItem($this->pointer);
     }
 
     /**
      * @param int $pointer
-     * @return \SimpleXMLElement
+     * @return \SimpleXMLElement|null
      * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
-    protected function getItem(int $pointer): \SimpleXMLElement
+    protected function getItem(int $pointer): ?\SimpleXMLElement
     {
-        return $this->getFeed()->xpath('//item')[$pointer];
+        return $this->getFeed()->xpath('//item')[$pointer] ?? null;
     }
 
     /**
