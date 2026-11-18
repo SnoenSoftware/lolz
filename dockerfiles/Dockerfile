@@ -29,7 +29,7 @@ CMD [ "crond", "-f" ]
 FROM node:lts-alpine as frontend-builder
 WORKDIR /app
 COPY ./package.json ./yarn.lock /app/
-RUN corepack enable && yarn
+RUN npm install --global corepack && corepack enable && yarn
 COPY ./ /app
 RUN yarn
 RUN yarn prod
