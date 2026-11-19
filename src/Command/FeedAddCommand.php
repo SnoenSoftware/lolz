@@ -7,14 +7,15 @@ use App\Model\Parser\GenericParser;
 use App\Model\ParserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(name: 'feed:add')]
 class FeedAddCommand extends Command
 {
-    protected static $defaultName = 'feed:add';
     /**
      * @var EntityManagerInterface
      */
@@ -28,17 +29,17 @@ class FeedAddCommand extends Command
         EntityManagerInterface $entityManager,
         ParserRepository $parserRepository
     ) {
-        parent::__construct(self::$defaultName);
+        parent::__construct();
         $this->entityManager = $entityManager;
         $this->parserRepository = $parserRepository;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setDescription('Add a feed');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
         $url = $io->ask("What is the feed url?");

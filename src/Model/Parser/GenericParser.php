@@ -11,8 +11,7 @@ use App\Entity\Lol;
 use App\Model\Api\ParserAbstract;
 use Laminas\Feed\Reader\Feed\FeedInterface;
 use Laminas\Feed\Reader\Reader;
-use PHPHtmlParser\Dom;
-use PHPHtmlParser\Exceptions\ChildNotFoundException;
+use Symfony\Component\DomCrawler\Crawler;
 
 class GenericParser extends ParserAbstract
 {
@@ -23,7 +22,6 @@ class GenericParser extends ParserAbstract
 
     /**
      * @return Lol|null
-     * @throws ChildNotFoundException
      * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     public function next(): ?Lol
@@ -37,9 +35,9 @@ class GenericParser extends ParserAbstract
         $feed->next();
 
         $content = $next->getContent();
-        $dom = new Dom();
+        $dom = new Crawler();
         try {
-            $dom->loadStr($content);
+            $dom->addHtmlContent($content);
         } catch (\Exception $e) {
             return $this->next();
         }
@@ -65,28 +63,20 @@ class GenericParser extends ParserAbstract
         return $lol;
     }
 
-    private function getVideoSources(Dom $dom): array
+    private function getVideoSources(Crawler $dom): array
     {
         try {
-            $videos = $dom->find('video');
+            $videos = $dom->filter('video');
         } catch (\Exception $e) {
             return [];
         }
         $returnSources = [];
 
-        if (!empty($videos) && $videos->count() > 0) {
-            /** @var Dom\HtmlNode $video */
-            $video = $videos->getIterator()->current();
-            try {
-                $sources = $video->find('source');
-            } catch (ChildNotFoundException $e) {
-                return [];
-            }
-            /** @var Dom\HtmlNode $source */
-            foreach ($sources as $source) {
+        if ($videos->count() > 0) {
+            foreach ($videos->first()->filter('source') as $source) {
                 $returnSources[] = [
-                    'src' => $source->getTag()->getAttribute('src')['value'],
-                    'type' => $source->getTag()->getAttribute('type')['value']
+                    'src' => $source->getAttribute('src'),
+                    'type' => $source->getAttribute('type')
                 ];
             }
         }
@@ -94,39 +84,35 @@ class GenericParser extends ParserAbstract
         return $returnSources;
     }
 
-    private function getImageUrl(Dom $dom): string
+    private function getImageUrl(Crawler $dom): string
     {
         $img = $this->getImage($dom);
         if (is_null($img)) {
             return "";
         }
-        return $img->getTag()->getAttribute('src')['value'];
+        return $img->attr('src') ?? '';
     }
 
-    private function getImageTitle(Dom $dom): ?string
+    private function getImageTitle(Crawler $dom): ?string
     {
         $img = $this->getImage($dom);
         if (is_null($img)) {
             return null;
         }
-        $title = $img->getTag()->getAttribute('title') ?? $img->getTag()->getAttribute('alt');
-
-        return $title ? $title['value'] : '';
+        return $img->attr('title') ?? $img->attr('alt') ?? '';
     }
 
-    private function getImage(Dom $dom): ?Dom\HtmlNode
+    private function getImage(Crawler $dom): ?Crawler
     {
         try {
-            $imgs = $dom->find('img');
+            $imgs = $dom->filter('img');
         } catch (\Exception $e) {
             return null;
         }
         if ($imgs->count() == 0) {
             return null;
         }
-        /** @var Dom\HtmlNode $img */
-        $img = $imgs->getIterator()->current();
-        return $img;
+        return $imgs->first();
     }
 
     protected function getFeed(): FeedInterface

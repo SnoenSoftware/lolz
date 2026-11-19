@@ -24,6 +24,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Test PHP runtime before publishing
+        run: |
+          docker build . -f dockerfiles/Dockerfile --target=cron --load -t lolz:test
+          docker run --rm --network none --entrypoint php -w /app lolz:test -d error_reporting=-1 vendor/bin/phpunit --do-not-cache-result
+
       - name: build and push
         run: make prod
         env:

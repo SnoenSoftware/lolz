@@ -12,7 +12,7 @@ use App\Entity\Lol;
 use App\Model\Api\ParserAbstract;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use PHPHtmlParser\Dom;
+use Symfony\Component\DomCrawler\Crawler;
 
 class DevHumorParser extends ParserAbstract
 {
@@ -88,11 +88,6 @@ class DevHumorParser extends ParserAbstract
      * @param string $url
      * @return string
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \PHPHtmlParser\Exceptions\ChildNotFoundException
-     * @throws \PHPHtmlParser\Exceptions\CircularException
-     * @throws \PHPHtmlParser\Exceptions\CurlException
-     * @throws \PHPHtmlParser\Exceptions\NotLoadedException
-     * @throws \PHPHtmlParser\Exceptions\StrictException
      * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     protected function fetchImage(string $url): string
@@ -103,11 +98,14 @@ class DevHumorParser extends ParserAbstract
         )->getBody()->getContents();
 
 
-        $dom = new Dom();
-        $dom->load($page);
-        /** @var Dom\HtmlNode $image */
-        $image = $dom->find('.single-media.margin-bottom')->toArray()[0];
-        return $image->tag->getAttribute('src')['value'];
+        $dom = new Crawler();
+        $dom->addHtmlContent($page);
+        $image = $dom->filter('.single-media.margin-bottom')->first();
+        $src = $image->attr('src');
+        if (!$src) {
+            throw new \RuntimeException('DevHumor image has no source.');
+        }
+        return $src;
     }
 
     /**

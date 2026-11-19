@@ -14,7 +14,7 @@ use App\Service\LolzProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -26,29 +26,29 @@ use Twig\Error\SyntaxError;
 class ApiController extends AbstractController
 {
     /**
-     * @Route("/api/twitter", name="twitter", methods={"GET"}, condition="request.get('url') != null")
      * @param Request $request
      * @param Twitter $twitter
      * @return JsonResponse
      * @author bjorn
      */
+    #[Route('/api/twitter', name: 'twitter', methods: ['GET'], condition: "request.query.get('url') != null")]
     public function twitter(Request $request, Twitter $twitter): JsonResponse
     {
-        $statusUrl = $request->get('url');
+        $statusUrl = $request->query->get('url');
         $tweet = $twitter->getTweet($statusUrl);
         return new JsonResponse($tweet);
     }
 
     /**
-     * @Route("/api/imgur", name="imgur", methods={"GET"}, condition="request.get('url') != null")
      * @param Request $request
      * @param Imgur $imgur
      * @return JsonResponse
      * @author bjorn
      */
+    #[Route('/api/imgur', name: 'imgur', methods: ['GET'], condition: "request.query.get('url') != null")]
     public function imgur(Request $request, Imgur $imgur): JsonResponse
     {
-        $statusUrl = $request->get('url');
+        $statusUrl = $request->query->get('url');
         $extension = pathinfo($statusUrl, PATHINFO_EXTENSION);
         if ($extension) {
             // It was already a real image url
@@ -64,11 +64,11 @@ class ApiController extends AbstractController
     }
 
     /**
-     * @Route("/api/more/page/{page}", name="more", requirements={"page"="\d+"})
      * @param int $page
      * @param LolzProvider $lolzProvider
      * @return JsonResponse
      */
+    #[Route('/api/more/page/{page}', name: 'more', requirements: ['page' => '\d+'])]
     public function moreLolz(LolzProvider $lolzProvider, int $page = 0): JsonResponse
     {
         try {

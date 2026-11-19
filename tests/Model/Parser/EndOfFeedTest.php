@@ -7,13 +7,12 @@ use App\Model\Parser\GenericParser;
 use App\Model\Parser\RedditParser;
 use App\Model\Parser\XkcdParser;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class EndOfFeedTest extends TestCase
 {
-    /**
-     * @dataProvider feeds
-     */
+    #[DataProvider('feeds')]
     public function testEndOfFeedIsWarningFree(string $parserClass, int $entryCount): void
     {
         $atom = in_array($parserClass, [XkcdParser::class, RedditParser::class], true);
@@ -66,7 +65,7 @@ class EndOfFeedTest extends TestCase
         }
     }
 
-    public function feeds(): iterable
+    public static function feeds(): iterable
     {
         foreach ([GenericParser::class, XkcdParser::class, DevHumorParser::class, RedditParser::class] as $parser) {
             foreach ([0, 1, 10, 15, 20] as $count) {

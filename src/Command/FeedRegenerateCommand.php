@@ -15,14 +15,15 @@ use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(name: 'feed:regenerate')]
 class FeedRegenerateCommand extends Command
 {
-    protected static $defaultName = 'feed:regenerate';
 
     /**
      * @var Client
@@ -40,10 +41,10 @@ class FeedRegenerateCommand extends Command
         private EntityManagerInterface $entityManager,
         private LolRepository $lolRepository
     ) {
-        parent::__construct(self::$defaultName);
+        parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setDescription('Get all feeds and dump');
         $this->addOption(
@@ -54,7 +55,7 @@ class FeedRegenerateCommand extends Command
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
         $io->info((new DateTime('now'))->format("[Y-m-d H:i:s] "). "Fetching feeds");

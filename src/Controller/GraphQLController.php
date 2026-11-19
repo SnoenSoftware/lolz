@@ -17,16 +17,16 @@ use GraphQL\Type\Definition\Type;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class GraphQLController extends AbstractController
 {
     /**
-     * @Route("/graphql", methods={"POST"})
      * @param Request $request
      * @param LolzProvider $lolzProvider
      * @return JsonResponse
      */
+    #[Route('/graphql', methods: ['POST'])]
     public function query(Request $request, LolzProvider $lolzProvider): JsonResponse
     {
         $lolType = Lol::getGraphQlDefinition();

@@ -10,8 +10,7 @@ namespace App\Model\Parser;
 
 use App\Entity\Lol;
 use App\Model\Api\ParserAbstract;
-use PHPHtmlParser\Dom;
-use function GuzzleHttp\Psr7\str;
+use Symfony\Component\DomCrawler\Crawler;
 
 class RedditParser extends ParserAbstract
 {
@@ -77,29 +76,23 @@ class RedditParser extends ParserAbstract
     /**
      * @param \SimpleXMLElement|null $current
      * @return string|null
-     * @throws \PHPHtmlParser\Exceptions\ChildNotFoundException
-     * @throws \PHPHtmlParser\Exceptions\CircularException
-     * @throws \PHPHtmlParser\Exceptions\CurlException
-     * @throws \PHPHtmlParser\Exceptions\NotLoadedException
-     * @throws \PHPHtmlParser\Exceptions\StrictException
-     * @throws \PHPHtmlParser\Exceptions\UnknownChildTypeException
      * @author Bjørn Snoen <bjorn.snoen@gmail.com>
      */
     private function extractImageHref(?\SimpleXMLElement $current): ?string
     {
-        $content = new Dom();
-        $content->load((string)$current->content);
-        $links = $content->find('a');
+        $content = new Crawler();
+        $content->addHtmlContent((string)$current->content);
+        $links = $content->filter('a');
         $imageHref = null;
-        /** @var Dom\HtmlNode $link */
-        foreach ($links->toArray() as $link) {
-            if ($link->innerHtml() == "[link]") {
-                $imageHref = $link->tag->getAttribute('href')['value'];
-            } elseif (strpos($link->tag->getAttribute('href')['value'], 'i.redd.it') !== false) {
-                $imageHref = $link->tag->getAttribute('href')['value'];
+        foreach ($links as $link) {
+            $href = $link->getAttribute('href');
+            if ($link->textContent == "[link]") {
+                $imageHref = $href;
+            } elseif (strpos($href, 'i.redd.it') !== false) {
+                $imageHref = $href;
                 break;
-            } elseif (strpos($link->tag->getAttribute('href')['value'], 'v.redd.it') !== false) {
-                $imageHref = $link->tag->getAttribute('href')['value'];
+            } elseif (strpos($href, 'v.redd.it') !== false) {
+                $imageHref = $href;
                 break;
             }
         }
